@@ -1,4 +1,6 @@
-﻿@inject SignInManager<DealershipUser> SignInManager
+﻿@using CarDealership.Models.DataModels
+
+@inject SignInManager<DealershipUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

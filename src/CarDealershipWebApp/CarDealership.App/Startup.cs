@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CarDealership.App.Models;
-using CarDealership.App.Areas.Identity.Data;
+
+using CarDealership.Models.DataModels;
+using CarDealership.Data;
 
 namespace CarDealership.App
 {
