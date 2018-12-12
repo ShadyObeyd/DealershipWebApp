@@ -8,8 +8,8 @@ namespace CarDealership.Models.DataModels.MappingTables.Vehicles
 
         public string ExtraId { get; set; }
 
-        public Vehicle Vehicle { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
 
-        public Extra Extra { get; set; }
+        public virtual Extra Extra { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace CarDealership.Models.DataModels
     {
         public string Name { get; set; }
 
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

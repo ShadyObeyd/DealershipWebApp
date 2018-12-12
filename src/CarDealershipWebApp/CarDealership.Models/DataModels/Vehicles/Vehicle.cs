@@ -27,6 +27,6 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public Transmission Transmission { get; set; }
 
-        public ICollection<VehicleExtra> Extras { get; set; }
+        public virtual ICollection<VehicleExtra> Extras { get; set; }
     }
 }
