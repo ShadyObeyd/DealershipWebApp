@@ -14,5 +14,7 @@ namespace CarDealership.Models.DataModels
         public decimal PriceFrom { get; set; }
 
         public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
     }
 }
