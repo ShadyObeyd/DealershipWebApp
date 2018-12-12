@@ -2,11 +2,11 @@
 {
     public enum CarCategory
     {
-        Saloon = 1,
-        OffRoad = 2,
-        Van = 3,
-        Estate = 4,
-        Sports = 5,
-        Cabriolet = 6
+        Saloon = 1, // Седан
+        OffRoad = 2, // Джип
+        Van = 3, // Ван
+        Estate = 4, // Комби
+        Sports = 5, // Купе
+        Cabriolet = 6 // Кабрио
     }
 }
