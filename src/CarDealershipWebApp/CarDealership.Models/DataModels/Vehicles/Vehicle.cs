@@ -23,6 +23,8 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public int YearOfProduction { get; set; }
 
+        public int HorsePower { get; set; }
+
         public EngineType EngineType { get; set; }
 
         public Transmission Transmission { get; set; }
