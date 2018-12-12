@@ -10,6 +10,7 @@
         ElectricSystem = 6,
         ExhaustingSystem = 7,
         Interior = 8,
-        Transmission = 9
+        Transmission = 9,
+        Other = 10
     }
 }
