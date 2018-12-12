@@ -8,5 +8,11 @@ namespace CarDealership.Models.DataModels.Parts
         public string Name { get; set; }
 
         public PartCategory Category { get; set; }
+
+        public decimal PriceFrom { get; set; }
+
+        public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
     }
 }

@@ -16,5 +16,11 @@ namespace CarDealership.Models.DataModels.Tyres
         public int Width { get; set; }
 
         public int Height { get; set; }
+
+        public decimal PriceFrom { get; set; }
+
+        public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
     }
 }

@@ -10,5 +10,11 @@ namespace CarDealership.Models.DataModels.Services
         public string Description { get; set; }
 
         public ServiceType ServiceType { get; set; }
+
+        public decimal PriceFrom { get; set; }
+
+        public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
     }
 }

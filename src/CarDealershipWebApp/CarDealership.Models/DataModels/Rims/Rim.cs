@@ -11,5 +11,11 @@ namespace CarDealership.Models.DataModels.Rims
         public string RimMake { get; set; }
 
         public int BoltsCount { get; set; }
+
+        public decimal PriceFrom { get; set; }
+
+        public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
     }
 }

@@ -23,6 +23,12 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public int HorsePower { get; set; }
 
+        public decimal PriceFrom { get; set; }
+
+        public decimal PriceTo { get; set; }
+
+        public string Location { get; set; }
+
         public EngineType EngineType { get; set; }
 
         public Transmission Transmission { get; set; }
