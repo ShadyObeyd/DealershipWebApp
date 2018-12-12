@@ -2,8 +2,9 @@
 {
     public enum Transmission
     {
-        Manual = 1,
-        Automatic = 2,
-        SemiAutomatic = 3
+        All = 1,
+        Manual = 2,
+        Automatic = 3,
+        SemiAutomatic = 4
     }
 }

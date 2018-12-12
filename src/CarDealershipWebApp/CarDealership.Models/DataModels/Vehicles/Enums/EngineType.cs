@@ -2,10 +2,11 @@
 {
     public enum EngineType
     {
-        Diesel = 1,
-        Gasoline = 2,
-        GasolineAndLPG = 3,
-        Electric = 4,
-        Hybrid = 5
+        All = 1,
+        Diesel = 2,
+        Gasoline = 3,
+        GasolineAndLPG = 4,
+        Electric = 5,
+        Hybrid = 6
     }
 }
