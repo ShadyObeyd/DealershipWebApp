@@ -12,5 +12,9 @@ namespace CarDealership.Models.DataModels.Tyres
         public int WeightIndex { get; set; }
 
         public SeasonType SeasonType { get; set; }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
     }
 }
