@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CarDealership.Models.DataModels
 {
@@ -9,5 +10,7 @@ namespace CarDealership.Models.DataModels
         public string MiddleName { get; set; }
 
         public string LastName { get; set; }
+
+        public DateTime RegisteredOn { get; set; }
     }
 }
