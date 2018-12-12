@@ -6,7 +6,8 @@ namespace CarDealership.Models.DataModels.Vehicles
 {
     public abstract class Vehicle : BaseModel
     {
-        public Vehicle()
+        public Vehicle() 
+            : base()
         {
             this.Extras = new HashSet<VehicleExtra>();
         }
@@ -24,6 +25,8 @@ namespace CarDealership.Models.DataModels.Vehicles
         public int YearOfProduction { get; set; }
 
         public int HorsePower { get; set; }
+
+        public string Location { get; set; }
 
         public EngineType EngineType { get; set; }
 
