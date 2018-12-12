@@ -16,10 +16,6 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public string Model { get; set; }
 
-        public decimal PriceFrom { get; set; }
-
-        public decimal PriceTo { get; set; }
-
         public string Color { get; set; }
 
         public int YearOfProduction { get; set; }
