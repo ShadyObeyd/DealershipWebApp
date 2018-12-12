@@ -1,10 +1,11 @@
-﻿using CarDealership.Models.DataModels.MappingTables.Vehicles;
+﻿using CarDealership.Models.DataModels.Contracts;
+using CarDealership.Models.DataModels.MappingTables.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
 using System.Collections.Generic;
 
 namespace CarDealership.Models.DataModels.Vehicles
 {
-    public abstract class Vehicle : BaseModel
+    public abstract class Vehicle : BaseModel, ISellable
     {
         public Vehicle() 
             : base()

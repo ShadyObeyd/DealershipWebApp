@@ -1,6 +1,8 @@
-﻿namespace CarDealership.Models.DataModels.Tyres
+﻿using CarDealership.Models.DataModels.Contracts;
+
+namespace CarDealership.Models.DataModels.Tyres
 {
-    public class Tyre : BaseModel
+    public class Tyre : BaseModel, ISellable
     {
         public string Make { get; set; }
 

@@ -12,8 +12,4 @@
     <ProjectReference Include="..\CarDealership.Utilities\CarDealership.Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataModels\Contracts\" />
-  </ItemGroup>
-
 </Project>
