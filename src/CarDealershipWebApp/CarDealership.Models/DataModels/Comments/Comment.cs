@@ -13,6 +13,10 @@ namespace CarDealership.Models.DataModels.Comments
 
         public virtual NewsClass News { get; set; }
 
-        public int NewsId { get; set; }
+        public string NewsId { get; set; }
+
+        public virtual DealershipUser Author { get; set; }
+
+        public string AuthorId { get; set; }
     }
 }

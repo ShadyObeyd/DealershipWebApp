@@ -1,4 +1,5 @@
-﻿using CarDealership.Models.DataModels.Contracts;
+﻿using CarDealership.Models.DataModels.Adds.Rims;
+using CarDealership.Models.DataModels.Contracts;
 
 namespace CarDealership.Models.DataModels.Rims
 {
@@ -12,10 +13,12 @@ namespace CarDealership.Models.DataModels.Rims
 
         public int BoltsCount { get; set; }
 
-        public decimal PriceFrom { get; set; }
-
-        public decimal PriceTo { get; set; }
+        public decimal Price { get; set; }
 
         public string Location { get; set; }
+
+        public virtual RimAdd Add { get; set; }
+
+        public string AddId { get; set; }
     }
 }

@@ -21,5 +21,9 @@ namespace CarDealership.Models.DataModels.News
         public DateTime PublishedOn { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual DealershipUser Author { get; set; }
+
+        public string AuthorId { get; set; }
     }
 }

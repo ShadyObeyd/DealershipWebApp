@@ -1,5 +1,4 @@
 ﻿using CarDealership.Models.DataModels.Contracts;
-using CarDealership.Models.DataModels.MappingTables.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
 using System.Collections.Generic;
 
@@ -10,7 +9,7 @@ namespace CarDealership.Models.DataModels.Vehicles
         public Vehicle() 
             : base()
         {
-            this.Extras = new HashSet<VehicleExtra>();
+            this.IsSold = false;
         }
 
         public string Make { get; set; }
@@ -23,9 +22,7 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public int HorsePower { get; set; }
 
-        public decimal PriceFrom { get; set; }
-
-        public decimal PriceTo { get; set; }
+        public decimal Price { get; set; }
 
         public string Location { get; set; }
 
@@ -33,6 +30,6 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public Transmission Transmission { get; set; }
 
-        public virtual ICollection<VehicleExtra> Extras { get; set; }
+        public bool IsSold { get; set; }
     }
 }
