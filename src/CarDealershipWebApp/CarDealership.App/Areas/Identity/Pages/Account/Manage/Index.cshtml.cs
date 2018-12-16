@@ -14,16 +14,13 @@ namespace CarDealership.App.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<DealershipUser> _userManager;
         private readonly SignInManager<DealershipUser> _signInManager;
-        private readonly IEmailSender _emailSender;
 
         public IndexModel(
             UserManager<DealershipUser> userManager,
-            SignInManager<DealershipUser> signInManager,
-            IEmailSender emailSender)
+            SignInManager<DealershipUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
         }
 
         public string Username { get; set; }
@@ -134,10 +131,6 @@ namespace CarDealership.App.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();
