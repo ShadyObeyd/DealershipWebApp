@@ -14,5 +14,8 @@
         public const string NameValidationRegex = @"^[A-Za-z]+$";
 
         public const string EmailErrorMessage = "The entered email is not valid";
+
+        public const string AdminRole = "Admin";
+        public const string UserRole = "User";
     }
 }

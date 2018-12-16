@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using CarDealership.Models.DataModels;
 using CarDealership.Data;
+using CarDealership.App.Middlewares;
 
 namespace CarDealership.App
 {
@@ -71,6 +72,8 @@ namespace CarDealership.App
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.SeedData();
 
             app.UseMvc(routes =>
             {
