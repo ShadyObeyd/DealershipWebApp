@@ -30,21 +30,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="" asp-action="">All News</a></li>
+                    <li><a asp-area="" asp-controller="" asp-action="">All Adds</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Bai Ilia Incorporated</p>
-        </footer>
-    </div>
+    @RenderBody()
+    <hr />
+    <footer class="footer navbar-fixed-bottom text-center">
+        <p>&copy; 2018 - Bai Ilia Incorporated</p>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -69,6 +66,6 @@
 </body>
 </html>
 @section Scripts
-{ 
+    {
     <partial name="_ValidationScriptsPartial" />
 }

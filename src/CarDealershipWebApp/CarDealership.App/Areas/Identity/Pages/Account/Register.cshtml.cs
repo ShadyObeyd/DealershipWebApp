@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using CarDealership.Models.DataModels;
+using CarDealership.Utilities;
 
 namespace CarDealership.App.Areas.Identity.Pages.Account
 {
@@ -35,21 +34,43 @@ namespace CarDealership.App.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
+            private const string FirstNameDisplayStr = "First Name";
+            private const string MiddleNameDisplayStr = "Middle Name";
+            private const string LastNameDisplayStr = "Last Name";
+            private const string ConfirmPasswordDisplayStr = "Confirm Password";
+            private const string ConfirmPasswordCompareProperty = "Password";
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [MinLength(Constants.UsernameMinLength, ErrorMessage = Constants.UsernameMinLengthMessage)]
+            [RegularExpression(Constants.UsernameValidationRegex, ErrorMessage = Constants.UsernameRegexMessage)]
+            public string Username { get; set; }
+
+            [Required]
+            [MinLength(Constants.PasswordMinLength, ErrorMessage = Constants.PasswordMinLengthMessage)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = ConfirmPasswordDisplayStr)]
+            [Compare(ConfirmPasswordCompareProperty, ErrorMessage = Constants.PasswordDoNotMatchMessage)]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [EmailAddress(ErrorMessage = Constants.EmailErrorMessage)]
+            public string Email { get; set; }
+
+            [Display(Name = FirstNameDisplayStr)]
+            [RegularExpression(Constants.NameValidationRegex)]
+            public string FirstName { get; set; }
+
+            [Display(Name = MiddleNameDisplayStr)]
+            [RegularExpression(Constants.NameValidationRegex)]
+            public string MiddleName { get; set; }
+
+            [Display(Name = LastNameDisplayStr)]
+            [RegularExpression(Constants.NameValidationRegex)]
+            public string LastName { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -62,7 +83,15 @@ namespace CarDealership.App.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new DealershipUser { UserName = Input.Email, Email = Input.Email };
+                var user = new DealershipUser
+                {
+                    UserName = Input.Username,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    MiddleName = Input.MiddleName,
+                    LastName = Input.LastName
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
