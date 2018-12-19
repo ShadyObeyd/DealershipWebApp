@@ -11,7 +11,7 @@ namespace CarDealership.App.Middlewares
 {
     public class SeedMiddleware
     {
-        private const string AdminUsername = "Pesho";
+        private const string AdminUsername = "pesho@pesho.bg";
         private const string AdminEmail = "pesho@pesho.bg";
         private const string AdminFirstName = "Peter";
         private const string AdminLastName = "Petrov";
