@@ -17,29 +17,28 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Bai Ilia Car Dealership</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="" asp-action="">All News</a></li>
-                    <li><a asp-area="" asp-controller="" asp-action="">All Adds</a></li>
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand nav-link-white" href="/">Bai Ilia Car Dealership</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="" asp-action="">All News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="" asp-action="">All Adds</a>
+                </li>
+            </ul>
+            <partial name="_LoginPartial" />
         </div>
     </nav>
-    @RenderBody()
+    <main>
+        @RenderBody()
+    </main>
     <hr />
-    <footer class="footer navbar-fixed-bottom text-center">
+    <footer class="text-center">
         <p>&copy; 2018 - Bai Ilia Incorporated</p>
     </footer>
 

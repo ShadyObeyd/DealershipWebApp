@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using CarDealership.Models.DataModels;
+using CarDealership.Utilities;
 
 namespace CarDealership.App.Areas.Identity.Pages.Account
 {
@@ -37,10 +38,12 @@ namespace CarDealership.App.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [MinLength(Constants.UsernameMinLength, ErrorMessage = Constants.UsernameMinLengthMessage)]
+            [RegularExpression(Constants.UsernameValidationRegex, ErrorMessage = Constants.UsernameRegexMessage)]
+            public string Username { get; set; }
 
             [Required]
+            [MinLength(Constants.PasswordMinLength, ErrorMessage = Constants.PasswordMinLengthMessage)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -73,7 +76,7 @@ namespace CarDealership.App.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
