@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CarDealership.Models.DataModels;
 using CarDealership.Data;
 using CarDealership.App.Middlewares;
+using CarDealership.Services;
 
 namespace CarDealership.App
 {
@@ -52,6 +53,10 @@ namespace CarDealership.App
                 opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //Application Services
+
+            services.AddScoped<NewsService>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

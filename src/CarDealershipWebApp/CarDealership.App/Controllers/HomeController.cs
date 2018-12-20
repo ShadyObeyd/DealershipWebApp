@@ -1,14 +1,22 @@
-﻿using System.Diagnostics;
+﻿using CarDealership.Services;
 using Microsoft.AspNetCore.Mvc;
-using CarDealership.App.Models;
 
 namespace CarDealership.App.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly NewsService newsService;
+
+        public HomeController(NewsService newsService)
+        {
+            this.newsService = newsService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = newsService.GetIndexModel();
+
+            return View(model);
         }
     }
 }

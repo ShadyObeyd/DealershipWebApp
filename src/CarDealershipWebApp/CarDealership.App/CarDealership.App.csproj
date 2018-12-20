@@ -21,14 +21,14 @@
   <ItemGroup>
     <ProjectReference Include="..\CarDealership.Data\CarDealership.Data.csproj" />
     <ProjectReference Include="..\CarDealership.Models\CarDealership.Models.csproj" />
+    <ProjectReference Include="..\CarDealership.Services\CarDealership.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Controllers\" />
     <Folder Include="Areas\Administration\Views\" />
-    <Folder Include="Areas\News\" />
-    <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Areas\User\Views\" />
+    <Folder Include="Areas\News\Controllers\" />
+    <Folder Include="Areas\News\Views\" />
   </ItemGroup>
 
 </Project>
