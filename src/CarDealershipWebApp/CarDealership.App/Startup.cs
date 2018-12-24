@@ -22,7 +22,7 @@ namespace CarDealership.App
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -33,7 +33,7 @@ namespace CarDealership.App
 
             services.AddDbContext<DealershipDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             services.AddIdentity<DealershipUser, IdentityRole>(opt =>
             {
@@ -48,7 +48,7 @@ namespace CarDealership.App
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DealershipDbContext>();
 
-            services.AddMvc(opt => 
+            services.AddMvc(opt =>
             {
                 opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             })
@@ -57,8 +57,9 @@ namespace CarDealership.App
             //Application Services
 
             services.AddScoped<NewsService>();
+            services.AddScoped<UserService>();
         }
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -82,6 +83,10 @@ namespace CarDealership.App
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "Administration",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

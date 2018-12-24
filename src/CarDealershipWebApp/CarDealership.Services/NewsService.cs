@@ -9,6 +9,8 @@ namespace CarDealership.Services
     {
         private readonly DealershipDbContext db;
 
+        private const int NewsCountToDisplay = 5;
+
         public NewsService(DealershipDbContext db)
         {
             this.db = db;
@@ -16,7 +18,7 @@ namespace CarDealership.Services
 
         public List<NewsIndexViewModel> GetIndexModel()
         {
-            return this.db.News.OrderByDescending(n => n.PublishedOn).Select(n => new NewsIndexViewModel
+            return this.db.News.OrderByDescending(n => n.PublishedOn).Take(NewsCountToDisplay).Select(n => new NewsIndexViewModel
             {
                 Id = n.Id,
                 Content = n.Content,
