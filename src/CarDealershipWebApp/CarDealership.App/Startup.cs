@@ -11,6 +11,7 @@ using CarDealership.Models.DataModels;
 using CarDealership.Data;
 using CarDealership.App.Middlewares;
 using CarDealership.Services;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CarDealership.App
 {
@@ -47,6 +48,14 @@ namespace CarDealership.App
             })
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DealershipDbContext>();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+
+            services.AddRouting();
 
             services.AddMvc(opt =>
             {

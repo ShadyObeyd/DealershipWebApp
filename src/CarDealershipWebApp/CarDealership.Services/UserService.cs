@@ -1,9 +1,7 @@
-﻿using CarDealership.Data;
-using CarDealership.Models.DataModels;
+﻿using CarDealership.Models.DataModels;
 using CarDealership.Models.ViewModels.Users;
 using CarDealership.Utilities;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,6 +43,25 @@ namespace CarDealership.Services
             }
 
             return users;
+        }
+
+        public void PromoteUser(DealershipUser user)
+        {
+            this.userManager.RemoveFromRoleAsync(user, Constants.UserRole).Wait();
+            this.userManager.AddToRoleAsync(user, Constants.AdminRole).Wait();
+        }
+
+        public void DemoteAdmin(DealershipUser user)
+        {
+            this.userManager.RemoveFromRoleAsync(user, Constants.AdminRole).Wait();
+            this.userManager.AddToRoleAsync(user, Constants.UserRole).Wait();
+        }
+
+        public DealershipUser GetUserById(string id)
+        {
+            var user = this.userManager.Users.FirstOrDefault(u => u.Id == id);
+
+            return user;
         }
     }
 }

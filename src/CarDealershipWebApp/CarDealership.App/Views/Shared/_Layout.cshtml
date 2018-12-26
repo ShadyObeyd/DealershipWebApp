@@ -47,7 +47,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Create News</a>
-                                    <a class="dropdown-item" asp-area="Administration" asp-controller="Users" asp-action="Index">All Users</a>
+                                    <a class="dropdown-item" asp-area="Administration" asp-controller="Home" asp-action="Index">All Users</a>
                                 </div>
                             </li>
                         }
@@ -87,6 +87,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 @section Scripts

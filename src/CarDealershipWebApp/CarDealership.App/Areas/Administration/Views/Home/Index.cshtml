@@ -26,7 +26,7 @@
             <td class="col-md-3">
                 @if (user.Role == Constants.AdminRole)
                 {
-                    <form class="form-inline" asp-controller="" asp-action="" method="post">
+                    <form class="form-inline" asp-area="Administration" asp-controller="Users" asp-action="Demote" method="post">
                         <input class="userId" name="userId" value="@user.Id" hidden />
                         <div class="button-holder d-flex">
                             <button type="submit" class="btn btn-dark">Demote to User</button>
@@ -35,7 +35,7 @@
                 }
                 else
                 {
-                    <form class="form-inline" asp-controller="" asp-action="" method="post">
+                    <form class="form-inline" asp-area="Administration" asp-controller="Users" asp-action="Promote" method="post">
                         <input class="userId" name="userId" value="@user.Id" hidden />
                         <div class="button-holder d-flex">
                             <button type="submit" class="btn btn-dark">Promote to Admin</button>
