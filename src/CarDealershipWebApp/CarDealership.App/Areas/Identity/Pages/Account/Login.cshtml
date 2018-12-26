@@ -44,7 +44,7 @@
         <div class="col-md-4 col-md-offset-2">
             <section>
                 <h4>Use another service to log in.</h4>
-                <hr />
+                <hr class="hr-style" />
                 @{
                     if ((Model.ExternalLogins?.Count ?? 0) == 0)
                     {
@@ -62,7 +62,9 @@
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins)
                                     {
-                                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-dark" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            @provider.DisplayName
+                                    </button>
                                     }
                                 </p>
                             </div>
