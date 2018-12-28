@@ -23,6 +23,10 @@
         public const string IndexView = "Index";
         public const string ErrorView = "Error";
 
+        public const string AllNewsView = "All";
+        public const string NewsController = "News";
+
         public const string InvalidUserMessage = "The requested account does not exist or it has been deleted.";
+        public const string InvalidNewsInputModelMessage = "News Title or Content must not be empty!";
     }
 }
