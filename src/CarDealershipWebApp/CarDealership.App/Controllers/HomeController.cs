@@ -16,7 +16,7 @@ namespace CarDealership.App.Controllers
         {
             var model = newsService.GetIndexModel();
 
-            return View(model);
+            return this.View(model);
         }
     }
 }

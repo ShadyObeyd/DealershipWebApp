@@ -93,8 +93,8 @@ namespace CarDealership.App
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "Administration",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Users}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     name: "default",

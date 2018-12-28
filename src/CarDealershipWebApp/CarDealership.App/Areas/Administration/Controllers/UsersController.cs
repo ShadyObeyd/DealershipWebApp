@@ -8,11 +8,11 @@ namespace CarDealership.App.Areas.Administration.Controllers
 {
     [Area(Constants.AdministrationArea)]
     [Authorize(Roles = Constants.AdminRole)]
-    public class HomeController : BaseController
+    public class UsersController : BaseController
     {
         private readonly UserService userService;
 
-        public HomeController(UserService userService)
+        public UsersController(UserService userService)
         {
             this.userService = userService;
         }
@@ -25,7 +25,6 @@ namespace CarDealership.App.Areas.Administration.Controllers
             return this.View(model);
         }
 
-        // TODO Fix action to work!
         public IActionResult Promote(string userId)
         {
             var user = this.userService.GetUserById(userId);
@@ -37,7 +36,6 @@ namespace CarDealership.App.Areas.Administration.Controllers
             return this.View(Constants.IndexView, model);
         }
 
-        // TODO Fix action to work!
         public IActionResult Demote(string userId)
         {
             var user = this.userService.GetUserById(userId);

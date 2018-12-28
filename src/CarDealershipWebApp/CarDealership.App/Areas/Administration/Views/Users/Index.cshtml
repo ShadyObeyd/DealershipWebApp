@@ -20,9 +20,9 @@
         @foreach (var user in Model)
         {
         <tr class="row">
-            <th class="col-md-3">@index</th>
-            <th class="col-md-3">@user.Username</th>
-            <th class="col-md-3">@user.Role</th>
+            <td class="col-md-3">@index</td>
+            <td class="col-md-3">@user.Username</td>
+            <td class="col-md-3">@user.Role</td>
             <td class="col-md-3">
                 @if (user.Role == Constants.AdminRole)
                 {
