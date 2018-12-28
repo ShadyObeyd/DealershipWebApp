@@ -4,6 +4,8 @@ using CarDealership.Utilities;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using CarDealership.Models.ViewModels.Errors;
 
 namespace CarDealership.Services
 {
@@ -18,7 +20,7 @@ namespace CarDealership.Services
 
         public List<AllUsersViewModel> GetAllUsers(string signedInUserUsername)
         {
-            var dbUsers = this.userManager.Users.Where(u => u.UserName != signedInUserUsername);
+            var dbUsers = this.userManager.Users.Where(u => u.UserName != signedInUserUsername && u.IsDeleted == false);
 
             var users = new List<AllUsersViewModel>();
 
@@ -47,12 +49,16 @@ namespace CarDealership.Services
 
         public void PromoteUser(DealershipUser user)
         {
+            this.CheckUser(user);
+
             this.userManager.RemoveFromRoleAsync(user, Constants.UserRole).Wait();
             this.userManager.AddToRoleAsync(user, Constants.AdminRole).Wait();
         }
 
         public void DemoteAdmin(DealershipUser user)
         {
+            this.CheckUser(user);
+
             this.userManager.RemoveFromRoleAsync(user, Constants.AdminRole).Wait();
             this.userManager.AddToRoleAsync(user, Constants.UserRole).Wait();
         }
@@ -62,6 +68,22 @@ namespace CarDealership.Services
             var user = this.userManager.Users.FirstOrDefault(u => u.Id == id);
 
             return user;
+        }
+
+        public ErrorViewModel GetErrorModel()
+        {
+            return new ErrorViewModel
+            {
+                Message = Constants.InvalidUserMessage
+            };
+        }
+
+        private void CheckUser(DealershipUser user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }

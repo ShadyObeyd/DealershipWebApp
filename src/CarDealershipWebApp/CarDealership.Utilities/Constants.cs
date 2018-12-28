@@ -21,5 +21,8 @@
         public const string AdministrationArea = "Administration";
 
         public const string IndexView = "Index";
+        public const string ErrorView = "Error";
+
+        public const string InvalidUserMessage = "The requested account does not exist or it has been deleted.";
     }
 }

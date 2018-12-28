@@ -3,6 +3,7 @@ using CarDealership.Services;
 using CarDealership.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CarDealership.App.Areas.Administration.Controllers
 {
@@ -29,7 +30,16 @@ namespace CarDealership.App.Areas.Administration.Controllers
         {
             var user = this.userService.GetUserById(userId);
 
-            this.userService.PromoteUser(user);
+            try
+            {
+                this.userService.PromoteUser(user);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = userService.GetErrorModel();
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
 
             var model = this.userService.GetAllUsers(this.User.Identity.Name);
 
@@ -39,6 +49,17 @@ namespace CarDealership.App.Areas.Administration.Controllers
         public IActionResult Demote(string userId)
         {
             var user = this.userService.GetUserById(userId);
+
+            try
+            {
+                this.userService.DemoteAdmin(user);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.userService.GetErrorModel();
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
 
             this.userService.DemoteAdmin(user);
 
