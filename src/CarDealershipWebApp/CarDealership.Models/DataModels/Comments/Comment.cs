@@ -7,8 +7,6 @@ namespace CarDealership.Models.DataModels.Comments
     {
         public string Content { get; set; }
 
-        public string AuthorName { get; set; }
-
         public DateTime PublishedOn { get; set; }
 
         public virtual NewsClass News { get; set; }

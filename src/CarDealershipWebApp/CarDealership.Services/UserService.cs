@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using CarDealership.Models.ViewModels.Errors;
+using Microsoft.AspNetCore.Http;
 
 namespace CarDealership.Services
 {
@@ -84,6 +85,11 @@ namespace CarDealership.Services
             {
                 throw new ArgumentException();
             }
+        }
+
+        public DealershipUser GetUserByUsername(string username)
+        {
+            return this.userManager.Users.FirstOrDefault(u => u.UserName == username);
         }
     }
 }

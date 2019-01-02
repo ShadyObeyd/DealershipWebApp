@@ -69,6 +69,7 @@ namespace CarDealership.App
 
             services.AddScoped<NewsService>();
             services.AddScoped<UserService>();
+            services.AddScoped<CommentsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

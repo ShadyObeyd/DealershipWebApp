@@ -3,6 +3,7 @@
 @model ReadNewsViewModel
 
 <h1 class="text-center">@Model.Title</h1>
+<hr class="hr-style" />
 <p>@Model.Content</p>
 <blockquote class="blockquote text-right">
     <footer class="blockquote-footer">@Model.AuthorName</footer>
@@ -13,6 +14,24 @@
         <input class="newsId" name="newsId" value="@Model.Id" hidden />
         <div class="col-12 text-center">
             <button type="submit" class="btn btn-dark">Delete News</button>
+        </div>
+    </form>
+}
+<hr class="hr-style" />
+@if (this.User.Identity.IsAuthenticated)
+{
+    <form class=" col-md-3" asp-controller="Comments" asp-action="Create" method="post">
+        <div class="form-group">
+            <input class="newsId" name="newsId" value="@Model.Id" hidden />
+            <div class="text-center">
+                <label>Comment</label>
+            </div>
+        </div>
+        <div class="input-group">
+            <textarea style="resize: none" class="form-control" name="content" id="content" placeholder="Content..."></textarea>
+            <span class="input-group-btn">
+                <button style="margin: 10%" type="submit" class="btn btn-dark">Add Comment</button>
+            </span>
         </div>
     </form>
 }
