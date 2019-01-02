@@ -17,6 +17,8 @@ namespace CarDealership.App
 {
     public class Startup
     {
+        private const int RequiredPasswordLength = 3;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +42,7 @@ namespace CarDealership.App
             {
                 opt.SignIn.RequireConfirmedEmail = false;
                 opt.Password.RequireDigit = false;
-                opt.Password.RequiredLength = 3;
+                opt.Password.RequiredLength = RequiredPasswordLength;
                 opt.Password.RequiredUniqueChars = 0;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireNonAlphanumeric = false;
