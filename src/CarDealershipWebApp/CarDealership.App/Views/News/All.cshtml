@@ -1,0 +1,38 @@
+﻿@using CarDealership.Models.ViewModels.News
+@using CarDealership.Utilities
+
+@model List<AllNewsViewModel>
+
+<h1 class="text-center">All News</h1>
+<hr class="hr-style" />
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var index = 1;}
+
+        @foreach (var news in Model)
+        {
+            <tr>
+                <th scope="row">@index</th>
+                <td>@news.Title</td>
+                <td>@news.AuthorName</td>
+                <td>
+                    <form class="form-inline" asp-controller="News" asp-action="Read" method="post">
+                        <input class="newsId" name="newsId" value="@news.Id" hidden />
+                        <div class="button-holder d-flex">
+                            <button type="submit" class="btn btn-default">Read News</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            { index++; }
+        }
+    </tbody>
+</table>

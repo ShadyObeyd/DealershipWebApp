@@ -1,0 +1,18 @@
+﻿@using CarDealership.Models.ViewModels.News
+@using CarDealership.Utilities
+@model ReadNewsViewModel
+
+<h1 class="text-center">@Model.Title</h1>
+<p>@Model.Content</p>
+<blockquote class="blockquote text-right">
+    <footer class="blockquote-footer">@Model.AuthorName</footer>
+</blockquote>
+@if (this.User.IsInRole(Constants.AdminRole))
+{
+    <form class="form-inline" asp-area="Administration" asp-controller="News" asp-action="Delete" method="post">
+        <input class="newsId" name="newsId" value="@Model.Id" hidden />
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-dark">Delete News</button>
+        </div>
+    </form>
+}

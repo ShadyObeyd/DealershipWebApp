@@ -16,6 +16,8 @@ namespace CarDealership.App.Areas.Administration.Controllers
         private readonly NewsService newsService;
         private readonly UserManager<DealershipUser> userManager;
 
+        private const string ErrorView = "DeleteError";
+
         public NewsController(NewsService newsService, UserManager<DealershipUser> userManager)
         {
             this.newsService = newsService;
@@ -28,18 +30,34 @@ namespace CarDealership.App.Areas.Administration.Controllers
             return this.View();
         }
 
-        public IActionResult Create(NewsCreateViewModel model)
+        public IActionResult Create(NewsCreateViewModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(Constants.ErrorView);
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, model);
             }
 
             var userId = this.userManager.GetUserId(HttpContext.User);
 
-            var news = this.newsService.CreateNews(model, userId);
+            var news = this.newsService.CreateNews(inputModel, userId);
 
-            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = ""});
+            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty});
+        }
+
+        public IActionResult Delete(string newsId)
+        {
+            if (string.IsNullOrEmpty(newsId))
+            {
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(ErrorView, model);
+            }
+
+            this.newsService.DeleteNews(newsId);
+
+            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty });
         }
     }
 }

@@ -28,5 +28,6 @@
 
         public const string InvalidUserMessage = "The requested account does not exist or it has been deleted.";
         public const string InvalidNewsInputModelMessage = "News Title or Content must not be empty!";
+        public const string NewsNotFoundMessage = "The requested news does not exist or it has been deleted.";
     }
 }
