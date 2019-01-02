@@ -4,7 +4,7 @@
     {
         public const int UsernameMinLength = 4;
         public const string UsernameMinLengthMessage = "Username must contain at least 4 symbols";
-        public const string UsernameValidationRegex = @"^[A-Za-z0-9-_\.*`]+$";
+        public const string UsernameValidationRegex = @"^[A-Za-z0-9-_\.*`@]+$";
         public const string UsernameRegexMessage = "Username may contain only alphanumeric characters, dashes, underscores, dots, asterisks and tildes";
 
         public const int PasswordMinLength = 5;
