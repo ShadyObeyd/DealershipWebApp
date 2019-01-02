@@ -30,6 +30,7 @@ namespace CarDealership.App.Areas.Administration.Controllers
             return this.View();
         }
 
+        [HttpPost]
         public IActionResult Create(NewsCreateViewModel inputModel)
         {
             if (!this.ModelState.IsValid)
@@ -57,6 +58,11 @@ namespace CarDealership.App.Areas.Administration.Controllers
 
             this.newsService.DeleteNews(newsId);
 
+            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty });
+        }
+
+        public IActionResult All()
+        {
             return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty });
         }
     }
