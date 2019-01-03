@@ -35,7 +35,7 @@ namespace CarDealership.App.Controllers
 
             var comment = this.commentsService.Create(authorId, newsId, content);
 
-            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController);
+            return this.RedirectToAction(Constants.ReadNewsView, Constants.NewsController, new { newsId });
         }
     }
 }

@@ -1,0 +1,24 @@
+﻿@if (this.User.Identity.IsAuthenticated)
+{
+    <form class="col-md-4" asp-controller="Comments" asp-action="Create" method="post">
+        <div class="form-group">
+            <input class="newsId" name="newsId" value="@Model.Id" hidden />
+            <div class="text-center">
+                <label>Comment</label>
+            </div>
+        </div>
+        <div class="input-group">
+            <textarea style="resize: none" class="form-control" name="content" id="content" placeholder="Content..."></textarea>
+            <span class="input-group-btn">
+                <button style="margin: 10%" type="submit" class="btn btn-dark">Add Comment</button>
+            </span>
+        </div>
+    </form>
+}
+else
+{
+    <div class="col-md-4">
+        <h4>To add a comment:</h4>
+        <p><a asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a> to create account or <a asp-area="Identity" asp-controller="Account" asp-action="Login">login</a> if you have an existing one.</p>
+    </div>
+}

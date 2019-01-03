@@ -18,20 +18,20 @@
     </form>
 }
 <hr class="hr-style" />
-@if (this.User.Identity.IsAuthenticated)
-{
-    <form class=" col-md-3" asp-controller="Comments" asp-action="Create" method="post">
-        <div class="form-group">
-            <input class="newsId" name="newsId" value="@Model.Id" hidden />
-            <div class="text-center">
-                <label>Comment</label>
+<partial name="ReadPartial" />
+<div class="col-md-4">
+    <h4>Comments:</h4>
+    <hr class="hr-style" />
+    @foreach (var comment in Model.Comments)
+    {
+        <div style="margin-top: 4%">
+            <div class="bg-secondary text-white">
+                @comment.Author:
+            </div>
+            <div>
+                @comment.Content
             </div>
         </div>
-        <div class="input-group">
-            <textarea style="resize: none" class="form-control" name="content" id="content" placeholder="Content..."></textarea>
-            <span class="input-group-btn">
-                <button style="margin: 10%" type="submit" class="btn btn-dark">Add Comment</button>
-            </span>
-        </div>
-    </form>
-}
+        <hr />
+    }
+</div>
