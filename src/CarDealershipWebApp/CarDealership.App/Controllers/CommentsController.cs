@@ -2,6 +2,7 @@
 using CarDealership.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CarDealership.App.Controllers
 {
@@ -23,19 +24,32 @@ namespace CarDealership.App.Controllers
         {
             if (string.IsNullOrEmpty(newsId))
             {
-               
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, model);
             }
 
             if (string.IsNullOrEmpty(content))
             {
+                var model = this.commentsService.GetErrorModel(Constants.CommentContentErrorMessage);
 
+                return this.View(Constants.ErrorView, model);
             }
 
             var authorId = this.userService.GetUserByUsername(this.User.Identity.Name).Id;
 
-            var comment = this.commentsService.Create(authorId, newsId, content);
+            try
+            {
+                var comment = this.commentsService.Create(authorId, newsId, content);
 
-            return this.RedirectToAction(Constants.ReadNewsView, Constants.NewsController, new { newsId });
+                return this.RedirectToAction(Constants.ReadNewsView, Constants.NewsController, new { newsId });
+            }
+            catch (ArgumentException)
+            {
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, model);
+            }
         }
     }
 }

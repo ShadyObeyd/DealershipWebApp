@@ -32,6 +32,14 @@
                 @comment.Content
             </div>
         </div>
+        @if (this.User.IsInRole(Constants.AdminRole))
+        {
+        <form class="form-inline" asp-area="Administration" asp-controller="Comments" asp-action="Delete" method="post">
+            <input class="commentId" name="commentId" value="@comment.Id" hidden />
+            <input class="newsId" name="newsId" value="@Model.Id" hidden />
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Comment</button>
+        </form>
+        }
         <hr />
     }
 </div>

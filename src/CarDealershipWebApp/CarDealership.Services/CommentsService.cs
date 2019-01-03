@@ -1,7 +1,9 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models.DataModels.Comments;
+using CarDealership.Models.ViewModels.Errors;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Linq;
 
 namespace CarDealership.Services
 {
@@ -16,6 +18,11 @@ namespace CarDealership.Services
 
         public Comment Create(string authorId, string newsId, string content)
         {
+            if (!this.db.News.Any(n => n.Id == newsId))
+            {
+                throw new ArgumentException();
+            }
+
             var comment = new Comment
             {
                 AuthorId = authorId,
@@ -29,9 +36,26 @@ namespace CarDealership.Services
 
             return comment;
         }
-    }
 
-    public class UserManager
-    {
+        public void DeleteComment(string commentId)
+        {
+            var comment = this.db.Comments.FirstOrDefault(c => c.Id == commentId);
+
+            if (comment == null)
+            {
+                throw new ArgumentException();
+            }
+
+            this.db.Comments.Remove(comment);
+            this.db.SaveChanges();
+        }
+
+        public ErrorViewModel GetErrorModel(string message)
+        {
+            return new ErrorViewModel
+            {
+                Message = message
+            };
+        }
     }
 }

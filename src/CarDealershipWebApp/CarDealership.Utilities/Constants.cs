@@ -31,5 +31,8 @@
         public const string NewsNotFoundMessage = "The requested news does not exist or it has been deleted.";
 
         public const string ReadNewsView = "Read";
+
+        public const string CommentErrorMessage = "The comment you are trying to delete does not exist.";
+        public const string CommentContentErrorMessage = "Cannot add an empty comment!";
     }
 }

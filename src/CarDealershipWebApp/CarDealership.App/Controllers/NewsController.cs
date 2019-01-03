@@ -30,9 +30,18 @@ namespace CarDealership.App.Controllers
                 return this.View(Constants.ErrorView, errorModel);
             }
 
-            var model = this.newsService.GetReadModel(newsId);
+            try
+            {
+                var model = this.newsService.GetReadModel(newsId);
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
         }
     }
 }

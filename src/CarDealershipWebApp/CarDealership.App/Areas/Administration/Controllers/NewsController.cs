@@ -6,6 +6,7 @@ using CarDealership.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CarDealership.App.Areas.Administration.Controllers
 {
@@ -56,9 +57,18 @@ namespace CarDealership.App.Areas.Administration.Controllers
                 return this.View(ErrorView, model);
             }
 
-            this.newsService.DeleteNews(newsId);
+            try
+            {
+                this.newsService.DeleteNews(newsId);
 
-            return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty });
+                return this.RedirectToAction(Constants.AllNewsView, Constants.NewsController, new { area = string.Empty });
+            }
+            catch (ArgumentException)
+            {
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(ErrorView, model);
+            }
         }
 
         public IActionResult All()
