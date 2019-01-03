@@ -1,2 +1,24 @@
-﻿<h1 class="text-center">Latest News</h1>
+﻿@using CarDealership.Models.ViewModels.News
+@model List<NewsIndexViewModel>
+
+<h1 class="text-center">Latest News</h1>
 <hr class="hr-style" />
+<div class="row">
+    @foreach (var news in Model)
+    {
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@news.Title</h5>
+                    <p class="card-text">@news.PartialContent</p>
+                    <form class="form-inline" asp-controller="News" asp-action="Read" method="post">
+                        <input class="newsId" name="newsId" value="@news.Id" hidden />
+                        <div class="button-holder d-flex">
+                            <button type="submit" class="btn btn-dark">Read More</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

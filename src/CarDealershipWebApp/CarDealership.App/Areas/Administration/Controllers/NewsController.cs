@@ -36,7 +36,7 @@ namespace CarDealership.App.Areas.Administration.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+                var model = this.newsService.GetErrorViewModel(Constants.InvalidNewsInputModelMessage);
 
                 return this.View(Constants.ErrorView, model);
             }
