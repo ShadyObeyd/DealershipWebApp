@@ -1,5 +1,4 @@
-﻿using CarDealership.Models.DataModels.Vehicles.Enums;
-using CarDealership.Models.ViewModels.Adds.CarAdds;
+﻿using CarDealership.Models.ViewModels.Adds.CarAdds;
 using CarDealership.Services;
 using CarDealership.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -54,7 +53,9 @@ namespace CarDealership.App.Controllers
             }
             catch (ArgumentException)
             {
-                return this.View(model);
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.CarAddInputErrorMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
             }
         }
     }

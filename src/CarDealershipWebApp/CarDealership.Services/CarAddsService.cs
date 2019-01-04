@@ -4,6 +4,7 @@ using CarDealership.Models.DataModels.Extras;
 using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
+using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Utilities;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,14 @@ namespace CarDealership.Services
             }
 
             return carExtras;
+        }
+
+        public ErrorViewModel GetErrorViewModel(string message)
+        {
+            return new ErrorViewModel
+            {
+                Message = message
+            };
         }
 
         public Car CreateCar(CarAddInputModel model, EngineType engineType, Transmission transmission, CarCategory carCategory, ICollection<CarExtra> extras)

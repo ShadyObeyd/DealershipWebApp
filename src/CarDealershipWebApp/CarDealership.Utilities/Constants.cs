@@ -46,5 +46,7 @@
 
         public const string GasolineAndLpgEngineTypeInput = "Gasoline / LPG";
         public const string GasolineAndLpgEngineTypeCorrection = "GasolineAndLPG";
+
+        public const string CarAddInputErrorMessage = "Car engine type, transmission or category is invalid!";
     }
 }

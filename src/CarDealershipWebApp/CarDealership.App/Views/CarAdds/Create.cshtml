@@ -116,7 +116,7 @@
                 <option>Sports</option>
                 <option>Cabriolet</option>
             </select>
-            <span asp-validation-for="CarCategory"></span>
+            <span asp-validation-for="CarCategory" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
             <label asp-for="CarColor"></label>
@@ -133,7 +133,7 @@
         <div class="form-group col-md-4">
             <label asp-for="CarYearOfProduction"></label>
             <select asp-for="CarYearOfProduction" class="form-control form-control-sm border border-dark">
-                @for (int i = 1901; i <= 2019; i++)
+                @for (int i = 2019; i >= 1901; i--)
                 {
                     <option>@i</option>
                 }
@@ -154,12 +154,12 @@
     <div class="form-group">
         <label asp-for="CarExtras"></label>
         <input type="text" class="form-control form-control-sm border border-dark" asp-for="CarExtras" placeholder="Enter car extras separated with commas (,)...">
-        <span asp-validation-for="CarExtras"></span>
+        <span asp-validation-for="CarExtras" class="text-danger"></span>
     </div>
     <div class="form-group text-center">
         <label asp-for="AdditionalInfo"></label>
         <textarea style="resize: none" asp-for="AdditionalInfo" class="form-control border border-dark"></textarea>
-        <span asp-validation-for="AdditionalInfo"></span>
+        <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
     </div>
     <hr class="hr-style" />
     <div class="col-12 text-center">
