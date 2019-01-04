@@ -4,20 +4,156 @@ using CarDealership.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarDealership.Data.Migrations
 {
     [DbContext(typeof(DealershipDbContext))]
-    partial class DealershipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190104103631_RemovedTypePropertyFromCarTruckAndMotorcycleModels")]
+    partial class RemovedTypePropertyFromCarTruckAndMotorcycleModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Accessories.Accessory", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessoryType");
+
+                    b.Property<string>("Location");
+
+                    b.Property<decimal>("Price");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accessories");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Accessories.AccessoryAdd", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccessoryId");
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccessoryId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("AccessoryAdds");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Parts.PartAdd", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("PartId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("PartId")
+                        .IsUnique()
+                        .HasFilter("[PartId] IS NOT NULL");
+
+                    b.ToTable("PartAdds");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Rims.RimAdd", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("RimId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("RimId")
+                        .IsUnique()
+                        .HasFilter("[RimId] IS NOT NULL");
+
+                    b.ToTable("RimAdds");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Services.ServiceAdd", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("ServiceId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("ServiceId")
+                        .IsUnique()
+                        .HasFilter("[ServiceId] IS NOT NULL");
+
+                    b.ToTable("ServiceAdds");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Tyres.TyreAdd", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TyreId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("TyreId")
+                        .IsUnique()
+                        .HasFilter("[TyreId] IS NOT NULL");
+
+                    b.ToTable("TyreAdds");
+                });
 
             modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Vehicles.CarAdd", b =>
                 {
@@ -174,42 +310,14 @@ namespace CarDealership.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.CarExtra", b =>
+            modelBuilder.Entity("CarDealership.Models.DataModels.Extra", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CarId");
 
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("CarExtras");
-                });
-
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.MotorcycleExtra", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<string>("MotorcycleId");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MotorcycleId");
-
-                    b.ToTable("MotorcycleExtras");
-                });
-
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.TruckExtra", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -217,9 +325,13 @@ namespace CarDealership.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("MotorcycleId");
+
                     b.HasIndex("TruckId");
 
-                    b.ToTable("TruckExtras");
+                    b.ToTable("Extras");
                 });
 
             modelBuilder.Entity("CarDealership.Models.DataModels.News.NewsClass", b =>
@@ -242,52 +354,142 @@ namespace CarDealership.Data.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.CarPicture", b =>
+            modelBuilder.Entity("CarDealership.Models.DataModels.Parts.Part", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddId");
+
+                    b.Property<int>("Category");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Parts");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Picture", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccessoryAddId");
 
                     b.Property<string>("CarAddId");
 
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarAddId");
-
-                    b.ToTable("CarPictures");
-                });
-
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.MotorcyclePicture", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<string>("MotorcycleAddId");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("PartAddId");
 
-                    b.HasKey("Id");
+                    b.Property<string>("RimAddId");
 
-                    b.HasIndex("MotorcycleAddId");
-
-                    b.ToTable("MotorcyclePictures");
-                });
-
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.TruckPicture", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("ServiceAddId");
 
                     b.Property<string>("TruckAddId");
 
+                    b.Property<string>("TyreAddId");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccessoryAddId");
+
+                    b.HasIndex("CarAddId");
+
+                    b.HasIndex("MotorcycleAddId");
+
+                    b.HasIndex("PartAddId");
+
+                    b.HasIndex("RimAddId");
+
+                    b.HasIndex("ServiceAddId");
+
                     b.HasIndex("TruckAddId");
 
-                    b.ToTable("TruckPictures");
+                    b.HasIndex("TyreAddId");
+
+                    b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Rims.Rim", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddId");
+
+                    b.Property<int>("BoltsCount");
+
+                    b.Property<string>("CarMake");
+
+                    b.Property<string>("CarModel");
+
+                    b.Property<string>("Location");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("RimMake");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rims");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Services.Service", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("ServiceType");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Tyres.Tyre", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddId");
+
+                    b.Property<int>("Height");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Make");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("SeasonType");
+
+                    b.Property<int>("SppedIndex");
+
+                    b.Property<int>("WeightIndex");
+
+                    b.Property<int>("Width");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tyres");
                 });
 
             modelBuilder.Entity("CarDealership.Models.DataModels.Vehicles.Car", b =>
@@ -512,6 +714,61 @@ namespace CarDealership.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Accessories.AccessoryAdd", b =>
+                {
+                    b.HasOne("CarDealership.Models.DataModels.Accessories.Accessory", "Accessory")
+                        .WithMany()
+                        .HasForeignKey("AccessoryId");
+
+                    b.HasOne("CarDealership.Models.DataModels.DealershipUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Parts.PartAdd", b =>
+                {
+                    b.HasOne("CarDealership.Models.DataModels.DealershipUser", "Creator")
+                        .WithMany("PartAdds")
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Parts.Part", "Part")
+                        .WithOne("Add")
+                        .HasForeignKey("CarDealership.Models.DataModels.Adds.Parts.PartAdd", "PartId");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Rims.RimAdd", b =>
+                {
+                    b.HasOne("CarDealership.Models.DataModels.DealershipUser", "Creator")
+                        .WithMany("RimAdds")
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Rims.Rim", "Rim")
+                        .WithOne("Add")
+                        .HasForeignKey("CarDealership.Models.DataModels.Adds.Rims.RimAdd", "RimId");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Services.ServiceAdd", b =>
+                {
+                    b.HasOne("CarDealership.Models.DataModels.DealershipUser", "Creator")
+                        .WithMany("ServiceAdds")
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Services.Service", "Service")
+                        .WithOne("Add")
+                        .HasForeignKey("CarDealership.Models.DataModels.Adds.Services.ServiceAdd", "ServiceId");
+                });
+
+            modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Tyres.TyreAdd", b =>
+                {
+                    b.HasOne("CarDealership.Models.DataModels.DealershipUser", "Creator")
+                        .WithMany("TyreAdds")
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Tyres.Tyre", "Tyre")
+                        .WithOne("Add")
+                        .HasForeignKey("CarDealership.Models.DataModels.Adds.Tyres.TyreAdd", "TyreId");
+                });
+
             modelBuilder.Entity("CarDealership.Models.DataModels.Adds.Vehicles.CarAdd", b =>
                 {
                     b.HasOne("CarDealership.Models.DataModels.Vehicles.Car", "Car")
@@ -556,23 +813,17 @@ namespace CarDealership.Data.Migrations
                         .HasForeignKey("NewsId");
                 });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.CarExtra", b =>
+            modelBuilder.Entity("CarDealership.Models.DataModels.Extra", b =>
                 {
-                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Car", "Car")
+                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Car")
                         .WithMany("Extras")
                         .HasForeignKey("CarId");
-                });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.MotorcycleExtra", b =>
-                {
-                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Motorcycle", "Motorcycle")
+                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Motorcycle")
                         .WithMany("Extras")
                         .HasForeignKey("MotorcycleId");
-                });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Extras.TruckExtra", b =>
-                {
-                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Truck", "Truck")
+                    b.HasOne("CarDealership.Models.DataModels.Vehicles.Truck")
                         .WithMany("Extras")
                         .HasForeignKey("TruckId");
                 });
@@ -584,25 +835,39 @@ namespace CarDealership.Data.Migrations
                         .HasForeignKey("AuthorId");
                 });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.CarPicture", b =>
+            modelBuilder.Entity("CarDealership.Models.DataModels.Picture", b =>
                 {
-                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.CarAdd", "CarAdd")
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Accessories.AccessoryAdd")
+                        .WithMany("Pictures")
+                        .HasForeignKey("AccessoryAddId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.CarAdd")
                         .WithMany("Pictures")
                         .HasForeignKey("CarAddId");
-                });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.MotorcyclePicture", b =>
-                {
-                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.MotorcycleAdd", "MotorcycleAdd")
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.MotorcycleAdd")
                         .WithMany("Pictures")
                         .HasForeignKey("MotorcycleAddId");
-                });
 
-            modelBuilder.Entity("CarDealership.Models.DataModels.Pictures.TruckPicture", b =>
-                {
-                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.TruckAdd", "TruckAdd")
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Parts.PartAdd")
+                        .WithMany("Pictures")
+                        .HasForeignKey("PartAddId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Rims.RimAdd")
+                        .WithMany("Pictures")
+                        .HasForeignKey("RimAddId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Services.ServiceAdd")
+                        .WithMany("Pictures")
+                        .HasForeignKey("ServiceAddId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Vehicles.TruckAdd")
                         .WithMany("Pictures")
                         .HasForeignKey("TruckAddId");
+
+                    b.HasOne("CarDealership.Models.DataModels.Adds.Tyres.TyreAdd")
+                        .WithMany("Pictures")
+                        .HasForeignKey("TyreAddId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

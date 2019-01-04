@@ -1,4 +1,5 @@
 ﻿using CarDealership.Models.DataModels.Adds.Vehicles;
+using CarDealership.Models.DataModels.Extras;
 using CarDealership.Models.DataModels.Vehicles.Enums;
 using System.Collections.Generic;
 
@@ -6,9 +7,10 @@ namespace CarDealership.Models.DataModels.Vehicles
 {
     public class Truck : Vehicle
     {
-        public Truck() : base()
+        public Truck() 
+            : base()
         {
-            this.Extras = new HashSet<Extra>();
+            this.Extras = new HashSet<TruckExtra>();
         }
 
         public int SeatsCount { get; set; }
@@ -23,6 +25,6 @@ namespace CarDealership.Models.DataModels.Vehicles
 
         public string AddId { get; set; }
 
-        public virtual ICollection<Extra> Extras { get; set; }
+        public virtual ICollection<TruckExtra> Extras { get; set; }
     }
 }

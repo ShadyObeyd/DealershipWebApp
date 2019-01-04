@@ -34,5 +34,9 @@
 
         public const string CommentErrorMessage = "The comment you are trying to delete does not exist.";
         public const string CommentContentErrorMessage = "Cannot add an empty comment!";
+
+        public const string CarType = "CarAdd";
+        public const string TruckType = "TruckAdd";
+        public const string MotorcycleType = "MotorcycleAdd";
     }
 }
