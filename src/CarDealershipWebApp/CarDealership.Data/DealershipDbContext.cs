@@ -20,7 +20,7 @@ namespace CarDealership.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(Configuration.ConnectionString);
                 optionsBuilder.UseLazyLoadingProxies();
