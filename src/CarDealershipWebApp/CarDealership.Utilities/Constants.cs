@@ -38,5 +38,13 @@
         public const string CarType = "CarAdd";
         public const string TruckType = "TruckAdd";
         public const string MotorcycleType = "MotorcycleAdd";
+
+        public const string CarHorsePowerErrorMessage = "Car horse power must be between 10 and 2000";
+        public const string CarYearOfProductionErrorMessage = "Year of production must be between 1901 and 2019";
+
+        public const string UploadPicturesView = "UploadPictures";
+
+        public const string GasolineAndLpgEngineTypeInput = "Gasoline / LPG";
+        public const string GasolineAndLpgEngineTypeCorrection = "GasolineAndLPG";
     }
 }
