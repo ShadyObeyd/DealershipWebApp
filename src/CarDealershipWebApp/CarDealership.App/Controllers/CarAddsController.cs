@@ -47,11 +47,9 @@ namespace CarDealership.App.Controllers
 
                 var userId = this.userService.GetUserByUsername(this.User.Identity.Name).Id;
 
-                var carAdd = this.carAddsService.CreateCarAdd(model, carId, userId).Id;
+                var carAddId = this.carAddsService.CreateCarAdd(model, carId, userId).Id;
 
-                // TODO Implement view model with car add id in order to upload pictures for said add...
-
-                return this.View(Constants.UploadPicturesView);
+                return this.RedirectToAction("Index", "Home");
             }
             catch (ArgumentException)
             {

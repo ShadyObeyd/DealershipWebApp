@@ -12,6 +12,9 @@ using CarDealership.Data;
 using CarDealership.App.Middlewares;
 using CarDealership.Services;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using CarDealership.Utilities;
 
 namespace CarDealership.App
 {
@@ -58,6 +61,10 @@ namespace CarDealership.App
             });
 
             services.AddRouting();
+
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), Constants.RootDirectory)));
 
             services.AddMvc(opt =>
             {

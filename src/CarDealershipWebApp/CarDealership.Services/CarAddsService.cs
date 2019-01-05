@@ -1,6 +1,7 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models.DataModels.Adds.Vehicles;
 using CarDealership.Models.DataModels.Extras;
+using CarDealership.Models.DataModels.Pictures;
 using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
@@ -8,6 +9,7 @@ using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace CarDealership.Services
@@ -17,6 +19,7 @@ namespace CarDealership.Services
         private readonly DealershipDbContext db;
 
         private const char CommaSeparator = ',';
+        private const string PictureSuffix = ".jpg";
 
         public CarAddsService(DealershipDbContext db)
         {
@@ -115,12 +118,41 @@ namespace CarDealership.Services
                 throw new ArgumentException();
             }
 
+            List<CarPicture> carPictures = new List<CarPicture>();
+
+            foreach (var picture in model.Pictures)
+            {
+                if (!picture.FileName.EndsWith(PictureSuffix))
+                {
+                    throw new InvalidOperationException();
+                }
+
+                string pictureDirectory = Directory.GetCurrentDirectory() + "\\" + Constants.RootDirectory + "\\" + "images" + "\\" + "CarImages";
+
+                var directory = Directory.CreateDirectory(pictureDirectory).ToString();
+
+                var path = Path.Combine(directory, picture.FileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    picture.CopyTo(stream);
+                }
+
+                var carPicture = new CarPicture
+                {
+                    Url = path
+                };
+
+                carPictures.Add(carPicture);
+            }
+
             var carAdd = new CarAdd
             {
                 Title = model.Title,
                 CarId = carId,
                 AdditionalInfo = model.AdditionalInfo,
-                CreatorId = creatorId
+                CreatorId = creatorId,
+                Pictures = carPictures
             };
 
             this.db.CarAdds.Add(carAdd);

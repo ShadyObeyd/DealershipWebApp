@@ -3,7 +3,7 @@
 
 <h1 class="text-center">Create a car add</h1>
 <hr class="hr-style" />
-<form asp-controller="CarAdds" asp-action="Create">
+<form enctype="multipart/form-data" asp-controller="CarAdds" asp-action="Create" method="post">
     <div class="form-group col-md-4 mx-auto text-center">
         <label asp-for="Title"></label>
         <input type="text" class="form-control form-control-sm border border-dark" asp-for="Title" placeholder="Enter title here...">
@@ -163,7 +163,14 @@
         <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
     </div>
     <hr class="hr-style" />
+    <div class="form-group text-center">
+        <div>
+            <h4>Upload pictures</h4>
+            <input type="file" asp-for="Pictures" multiple />
+        </div>
+    </div>
+    <hr class="hr-style" />
     <div class="col-12 text-center">
-        <button type="submit" class="btn btn-dark">Proceed to add pictures</button>
+        <button type="submit" class="btn btn-dark">Create add</button>
     </div>
 </form>

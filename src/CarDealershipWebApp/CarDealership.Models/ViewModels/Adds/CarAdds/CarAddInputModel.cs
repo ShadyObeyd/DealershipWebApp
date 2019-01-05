@@ -1,4 +1,6 @@
 ﻿using CarDealership.Utilities;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarDealership.Models.ViewModels.Adds.CarAdds
@@ -71,5 +73,8 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
         [Required]
         [Display(Name = CarTransmissionDisplayStr)]
         public string CarTransmission { get; set; }
+
+        [Required]
+        public List<IFormFile> Pictures { get; set; }
     }
 }
