@@ -13,7 +13,6 @@
         <div class="form-group col-md-4">
             <label asp-for="CarMake"></label>
             <select asp-for="CarMake" class="form-control form-control-sm border border-dark">
-                <option selected>Any</option>
                 <option>Alfa Romeo</option>
                 <option>Aston Martin</option>
                 <option>Audi</option>
@@ -109,7 +108,6 @@
         <div class="form-group col-md-4">
             <label asp-for="CarCategory"></label>
             <select asp-for="CarCategory" class="form-control form-control-sm border border-dark">
-                <option selected>Any</option>
                 <option>Saloon</option>
                 <option>OffRoad</option>
                 <option>Van</option>
@@ -134,7 +132,7 @@
         <div class="form-group col-md-4">
             <label asp-for="CarYearOfProduction"></label>
             <select asp-for="CarYearOfProduction" class="form-control form-control-sm border border-dark">
-                @for (int i = 2019; i >= 1901; i--)
+                @for (int i = DateTime.Now.Year; i >= 1901; i--)
                 {
                     <option>@i</option>
                 }
@@ -143,7 +141,7 @@
         </div>
         <div class="form-group col-md-4">
             <label asp-for="CarPrice"></label>
-            <input type="number" step="0.1" class="form-control form-control-sm border border-dark" asp-for="CarPrice" placeholder="Price...">
+            <input type="number" step="0.1" class="form-control form-control-sm border border-dark" asp-for="CarPrice" placeholder="Minimum value is 1">
             <span asp-validation-for="CarPrice" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">

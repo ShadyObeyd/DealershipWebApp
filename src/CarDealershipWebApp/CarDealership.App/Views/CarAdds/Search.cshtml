@@ -1,0 +1,160 @@
+﻿@using CarDealership.Models.ViewModels.Adds.CarAdds
+@model CarSelectInputModel
+
+<h1 class="text-center">Search for a car</h1>
+<hr class="hr-style" />
+
+<form asp-controller="CarAdds" asp-action="Search" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label asp-for="Make"></label>
+            <select asp-for="Make" class="form-control form-control-sm border border-dark">
+                <option>Alfa Romeo</option>
+                <option>Aston Martin</option>
+                <option>Audi</option>
+                <option>BMW</option>
+                <option>Bentley</option>
+                <option>Bugatti</option>
+                <option>Cadillac</option>
+                <option>Chevrolet</option>
+                <option>Chrysler</option>
+                <option>Citroen</option>
+                <option>Dacia</option>
+                <option>Daewoo</option>
+                <option>Daihatsu</option>
+                <option>Dodge</option>
+                <option>Ferrari</option>
+                <option>Fiat</option>
+                <option>Ford</option>
+                <option>GMC</option>
+                <option>Great Wall</option>
+                <option>Honda</option>
+                <option>Hyundai</option>
+                <option>Infiniti</option>
+                <option>Isuzu</option>
+                <option>Jaguar</option>
+                <option>Jeep</option>
+                <option>Kia</option>
+                <option>Lada</option>
+                <option>Lamborghini</option>
+                <option>Lancia</option>
+                <option>Land Rover</option>
+                <option>Lexus</option>
+                <option>Lincoln</option>
+                <option>Maserati</option>
+                <option>Maybah</option>
+                <option>Mazda</option>
+                <option>McLaren</option>
+                <option>Mercedes-Benz</option>
+                <option>Mini</option>
+                <option>Mitsubishi</option>
+                <option>Moskvich</option>
+                <option>Nissan</option>
+                <option>Opel</option>
+                <option>Peugeot</option>
+                <option>Porche</option>
+                <option>Renault</option>
+                <option>Rolls-Royce</option>
+                <option>Seat</option>
+                <option>Scoda</option>
+                <option>Subaru</option>
+                <option>Suzuki</option>
+                <option>Tesla</option>
+                <option>Toyota</option>
+                <option>Trabant</option>
+                <option>VW</option>
+                <option>Volga</option>
+                <option>Volvo</option>
+                <option>Wartburg</option>
+                <option>Zastava</option>
+                <option>Zaz</option>
+                <option>Other</option>
+            </select>
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Model"></label>
+            <input type="text" asp-for="Model" class="form-control form-control-sm border border-dark" />
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="StartingYear"></label>
+            <select asp-for="StartingYear" class="form-control form-control-sm border border-dark">
+                @for (int i = DateTime.Now.Year; i >= 1901; i--)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <span asp-validation-for="StartingYear" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="EndYear"></label>
+            <select asp-for="EndYear" class="form-control form-control-sm border border-dark">
+                @for (int i = DateTime.Now.Year; i >= 1901; i--)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <span asp-validation-for="EndYear" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label asp-for="StartingPrice"></label>
+            <input type="number" asp-for="StartingPrice" class="form-control form-control-sm border border-dark"  placeholder="Minimum value is 1"/>
+            <span asp-validation-for="StartingPrice" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="EndPrice"></label>
+            <input type="number" asp-for="EndPrice" class="form-control form-control-sm border border-dark" placeholder="Minimum value is 1"/>
+            <span asp-validation-for="EndPrice" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="HorsePower"></label>
+            <input type="number" asp-for="HorsePower" class="form-control form-control-sm border border-dark" />
+            <span asp-validation-for="HorsePower" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Location"></label>
+            <input type="text" asp-for="Location" class="form-control form-control-sm border border-dark" />
+        </div>
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="form-group col-md-3">
+            <label asp-for="EngineType"></label>
+            <select asp-for="EngineType" class="form-control form-control-sm border border-dark">
+                <option>Diesel</option>
+                <option>Gasoline</option>
+                <option>Gasoline / LPG</option>
+                <option>Electric</option>
+                <option>Hybrid</option>
+            </select>
+            <span asp-validation-for="EngineType" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Category"></label>
+            <select asp-for="Category" class="form-control form-control-sm border border-dark">
+                <option>Saloon</option>
+                <option>OffRoad</option>
+                <option>Van</option>
+                <option>Estate</option>
+                <option>Sports</option>
+                <option>Cabriolet</option>
+            </select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Transmission"></label>
+            <select asp-for="Transmission" class="form-control form-control-sm border border-dark">
+                <option>Manual</option>
+                <option>Automatic</option>
+                <option>SemiAutomatic</option>
+            </select>
+            <span asp-validation-for="Transmission" class="text-danger"></span>
+        </div>
+    </div>
+    <hr class="hr-style" />
+    <div class="col-12 text-center">
+        <button type="submit" class="btn btn-lg btn-dark">Search</button>
+    </div>
+</form>

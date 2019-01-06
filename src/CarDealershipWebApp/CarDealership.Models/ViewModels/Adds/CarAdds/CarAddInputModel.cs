@@ -1,5 +1,6 @@
 ﻿using CarDealership.Utilities;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,19 +10,13 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
     {
         private const string CarMakeDisplayStr = "Make";
         private const string CarModelDisplayStr = "Model";
-        private const string CarHorsePowerDisplayStr = "Horse Power";
         private const string CarColorDisplayStr = "Color";
         private const string CarCategoryDisplayStr = "Category";
-        private const int CarMinHorsePower = 10;
-        private const int CarMaxHorsePower = 2000;
         private const string CarExtrasDisplayStr = "Extras";
         private const string YearOfProductionDisplayStr = "Produced On";
-        private const int StartYear = 1901;
-        private const int EndYear = 2019;
         private const string CarLocationDisplayStr = "Location";
         private const string CarPriceDisplayStr = "Price";
         private const string CarTransmissionDisplayStr = "Transmission";
-        private const string CarEngineTypeDisplayStr = "Engine Type";
         private const string AdditionalInfoDisplayStr = "Additional Info";
 
         [Required]
@@ -39,13 +34,16 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
         [Display(Name = CarModelDisplayStr)]
         public string CarModel { get; set; }
 
-        [Display(Name = CarHorsePowerDisplayStr)]
-        [Range(CarMinHorsePower, CarMaxHorsePower, ErrorMessage = Constants.CarHorsePowerErrorMessage)]
+        [Required]
+        [Display(Name = Constants.CarHorsePowerDisplayStr)]
+        [Range(Constants.CarMinHorsePower, Constants.CarMaxHorsePower, ErrorMessage = Constants.CarHorsePowerErrorMessage)]
         public int CarHorsePower { get; set; }
 
+        [Required]
         [Display(Name = CarColorDisplayStr)]
         public string CarColor { get; set; }
 
+        [Required]
         [Display(Name = CarCategoryDisplayStr)]
         public string CarCategory { get; set; }
 
@@ -55,7 +53,7 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
 
         [Required]
         [Display(Name = YearOfProductionDisplayStr)]
-        [Range(StartYear, EndYear, ErrorMessage = Constants.CarYearOfProductionErrorMessage)]
+        [Range(Constants.YearMinValue, Constants.YearMaxValue, ErrorMessage = Constants.CarYearOfProductionErrorMessage)]
         public int CarYearOfProduction { get; set; }
 
         [Required]
@@ -64,10 +62,11 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
 
         [Required]
         [Display(Name = CarPriceDisplayStr)]
+        [Range(typeof(decimal), Constants.PriceMinValue, Constants.PriceMaxValue, ErrorMessage = Constants.PriceErrorMessage)]
         public decimal CarPrice { get; set; }
 
         [Required]
-        [Display(Name = CarEngineTypeDisplayStr)]
+        [Display(Name = Constants.CarEngineTypeDisplayStr)]
         public string CarEngineType { get; set; }
 
         [Required]

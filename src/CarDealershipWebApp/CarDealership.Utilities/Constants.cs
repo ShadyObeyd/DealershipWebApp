@@ -1,4 +1,6 @@
-﻿namespace CarDealership.Utilities
+﻿using System;
+
+namespace CarDealership.Utilities
 {
     public class Constants
     {
@@ -42,13 +44,35 @@
         public const string CarHorsePowerErrorMessage = "Car horse power must be between 10 and 2000";
         public const string CarYearOfProductionErrorMessage = "Year of production must be between 1901 and 2019";
 
-        public const string UploadPicturesView = "UploadPictures";
-
         public const string GasolineAndLpgEngineTypeInput = "Gasoline / LPG";
         public const string GasolineAndLpgEngineTypeCorrection = "GasolineAndLPG";
 
         public const string CarAddInputErrorMessage = "Car engine type, transmission or category is invalid!";
 
         public const string RootDirectory = "wwwroot";
+
+        public const string PictureNotValidMessage = "One or more files is not a valid jpeg file!";
+
+        public const string CarStringPropertyDefaultValue = "Any";
+        public const int CarNumberPropertyDefaultValue = 0;
+
+        public const string ViewAddsView = "ViewAdds";
+
+        public const string PriceMinValue = "1";
+        public const string PriceMaxValue = "79228162514264337593543950335";
+        public const string PriceErrorMessage = "Price cannot be a negative value!";
+        public const int YearMinValue = 1901;
+        public const int YearMaxValue = 2019;
+
+        public const string CarHorsePowerDisplayStr = "Horse Powers";
+
+        public const string CarEngineTypeDisplayStr = "Engine Type";
+
+        public const int CarMinHorsePower = 10;
+        public const int CarMaxHorsePower = 2000;
+
+        public const string ThreeDots = "...";
+
+        public const string AddNotFoundMessage = "Add does not exist.";
     }
 }

@@ -7,11 +7,12 @@ using System;
 
 namespace CarDealership.App.Controllers
 {
-    [Authorize]
     public class CarAddsController : BaseController
     {
         private readonly CarAddsService carAddsService;
         private readonly UserService userService;
+
+        private const string ViewAddErrorView = "ViewAddErrorView";
 
         public CarAddsController(CarAddsService carAddsService, UserService userService)
         {
@@ -19,12 +20,14 @@ namespace CarDealership.App.Controllers
             this.userService = userService;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return this.View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Create(CarAddInputModel model)
         {
@@ -49,13 +52,70 @@ namespace CarDealership.App.Controllers
 
                 var carAddId = this.carAddsService.CreateCarAdd(model, carId, userId).Id;
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("Index", "Home"); // TODO View Add
             }
             catch (ArgumentException)
             {
                 var errorModel = this.carAddsService.GetErrorViewModel(Constants.CarAddInputErrorMessage);
 
                 return this.View(Constants.ErrorView, errorModel);
+            }
+            catch (InvalidOperationException)
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.PictureNotValidMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(CarSelectInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            try
+            {
+                var viewModel = this.carAddsService.GetAddsAccordingToCriteria(inputModel);
+
+                return this.View(Constants.ViewAddsView, viewModel);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.CarAddInputErrorMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+        }
+
+        public IActionResult ViewAdd(string addId)
+        {
+            if (string.IsNullOrEmpty(addId))
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.AddNotFoundMessage);
+
+                return this.View(ViewAddErrorView, errorModel);
+            }
+
+            try
+            {
+                var viewModel = this.carAddsService.GetViewAddModel(addId);
+
+                return this.View(viewModel);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.AddNotFoundMessage);
+
+                return this.View(ViewAddErrorView, errorModel);
             }
         }
     }

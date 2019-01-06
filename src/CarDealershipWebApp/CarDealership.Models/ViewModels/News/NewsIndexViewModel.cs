@@ -1,8 +1,9 @@
-﻿namespace CarDealership.Models.ViewModels.News
+﻿using CarDealership.Utilities;
+
+namespace CarDealership.Models.ViewModels.News
 {
     public class NewsIndexViewModel
     {
-        private const string ThreeDots = "...";
         private const int ContentLenght = 100;
 
         public string Id { get; set; }
@@ -21,7 +22,7 @@
             }
             else
             {
-                return this.Content.Substring(0, ContentLenght) + ThreeDots;
+                return this.Content.Substring(0, ContentLenght) + Constants.ThreeDots;
             }
         }
     }
