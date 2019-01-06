@@ -167,7 +167,7 @@ namespace CarDealership.Services
             return carAdd;
         }
 
-        public List<ViewAddsModel> GetAddsAccordingToCriteria(CarSelectInputModel inputModel)
+        public List<ViewCarAddsViewModel> GetAddsAccordingToCriteria(CarSelectInputModel inputModel)
         {
             if (inputModel.StartingPrice < PriceMinValue)
             {
@@ -203,7 +203,7 @@ namespace CarDealership.Services
                              ca.Car.EngineType == this.GetCarEngineType(inputModel.EngineType) &&
                              ca.Car.Category == this.GetCarCategory(inputModel.Category) &&
                              ca.Car.IsSold == false)
-                .Select(ca => new ViewAddsModel
+                .Select(ca => new ViewCarAddsViewModel
                 {
                     Id = ca.Id,
                     Title = ca.Title,
@@ -227,7 +227,7 @@ namespace CarDealership.Services
                              ca.Car.Category == this.GetCarCategory(inputModel.Category) &&
                              ca.Car.Location == inputModel.Location &&
                              ca.Car.IsSold == false)
-                .Select(ca => new ViewAddsModel
+                .Select(ca => new ViewCarAddsViewModel
                 {
                     Id = ca.Id,
                     Title = ca.Title,
@@ -258,6 +258,7 @@ namespace CarDealership.Services
 
             var addModel = this.db.CarAdds.Where(ca => ca.Id == addId).Select(ca => new CarAddToBuyViewModel
             {
+                Id = ca.Id,
                 Category = ca.Car.Category,
                 Color = ca.Car.Color,
                 EngineType = engineType,
@@ -274,11 +275,29 @@ namespace CarDealership.Services
                 Title = ca.Title,
                 AdditionalInfo = ca.AdditionalInfo,
                 PicturesUrls = picturesUrls,
+                IsSold = ca.Car.IsSold,
                 CarExtras = string.Join(CarExtrasJoinPattern, ca.Car.Extras.Select(c => c.Name).ToList())
             })
             .FirstOrDefault();
 
             return addModel;
+        }
+
+        public void SellCar(string addId)
+        {
+            if (!this.db.CarAdds.Any(ca => ca.Id == addId))
+            {
+                throw new ArgumentException();
+            }
+
+            var carId = this.db.CarAdds.FirstOrDefault(ca => ca.Id == addId).CarId;
+
+            var car = this.db.Cars.FirstOrDefault(c => c.Id == carId);
+
+            car.IsSold = true;
+
+            this.db.Cars.Update(car);
+            this.db.SaveChanges();
         }
     }
 }

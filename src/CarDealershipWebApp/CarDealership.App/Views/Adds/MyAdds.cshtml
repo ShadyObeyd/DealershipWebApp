@@ -1,0 +1,84 @@
+﻿@using CarDealership.Models.ViewModels.Adds
+@model MyAddsViewModel
+
+<h1 class="text-center">My Adds</h1>
+<hr class="hr-style" />
+@if (Model.CarAdds.Any())
+{
+    <div class="card-columns">
+        @foreach (var carAdd in Model.CarAdds)
+        {
+            <div class="card border border-dark">
+                <img class="card-img-top" height="270" width="200" src="@carAdd.PictureUrl">
+                <div class="card-body">
+                    <h5 class="card-title">@carAdd.Title</h5>
+                    <p class="card-text">@carAdd.AdditionalInfoToDisplay</p>
+                </div>
+                <form asp-controller="CarAdds" asp-action="ViewAdd" method="post">
+                    <input class="addId" name="addId" id="addId" value="@carAdd.Id" hidden />
+                    <div class="col-12 text-center">
+                        <button style="margin-bottom: 2%" type="submit" class="btn btn-dark">View add</button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <h3 class="text-center">You don't have any published car adds.</h3>
+}
+<hr class="hr-style" />
+@if (Model.TruckAdds.Any())
+{
+    <div class="card-columns">
+        @foreach (var truckAdd in Model.TruckAdds)
+        {
+            <div class="card col-md-3 border border-dark">
+                <img class="card-img-top" height="270" width="200" src="@truckAdd.PictureUrl">
+                <div class="card-body">
+                    <h5 class="card-title">@truckAdd.Title</h5>
+                    <p class="card-text">@truckAdd.AdditionalInfoToDisplay</p>
+                </div>
+                <form asp-controller="CarAdds" asp-action="ViewAdd" method="post">
+                    <input class="addId" name="addId" id="addId" value="@truckAdd.Id" hidden />
+                    <div class="col-12 text-center">
+                        <button style="margin-bottom: 2%" type="submit" class="btn btn-dark">View add</button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+    <hr class="hr-style" />
+}
+else
+{
+    <h3 class="text-center">You don't have any published truck adds.</h3>
+}
+<hr class="hr-style" />
+@if (Model.MotorcycleAdds.Any())
+{
+    <div class="card-columns">
+        @foreach (var bikeAdd in Model.MotorcycleAdds)
+        {
+            <div class="card col-md-3 border border-dark">
+                <img class="card-img-top" height="270" width="200" src="@bikeAdd.PictureUrl">
+                <div class="card-body">
+                    <h5 class="card-title">@bikeAdd.Title</h5>
+                    <p class="card-text">@bikeAdd.AdditionalInfoToDisplay</p>
+                </div>
+                <form asp-controller="CarAdds" asp-action="ViewAdd" method="post">
+                    <input class="addId" name="addId" id="addId" value="@bikeAdd.Id" hidden />
+                    <div class="col-12 text-center">
+                        <button style="margin-bottom: 2%" type="submit" class="btn btn-dark">View add</button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3 class="text-center">You don't have any published motorcycle adds.</h3>
+}

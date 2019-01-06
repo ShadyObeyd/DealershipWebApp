@@ -74,5 +74,10 @@ namespace CarDealership.Utilities
         public const string ThreeDots = "...";
 
         public const string AddNotFoundMessage = "Add does not exist.";
+
+        public const string ViewAddView = "ViewAdd";
+
+        public const string MyAddsView = "MyAdds";
+        public const string AddsController = "Adds";
     }
 }

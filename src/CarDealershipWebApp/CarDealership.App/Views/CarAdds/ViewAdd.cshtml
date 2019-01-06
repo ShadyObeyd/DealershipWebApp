@@ -46,3 +46,48 @@
 {
     <img src="@imageUrl" width="180" height="110" class="border-0" />
 }
+<hr class="hr-style">
+<div class="jumbotron col-md-6 mx-auto">
+    @if (this.User.Identity.Name == Model.OwnerName)
+    {
+        <h4 class="text-center">Owner contacts:</h4>
+        <hr class="hr-style" />
+        <h5 class="text-center">This is your add.</h5>
+        if (Model.IsSold)
+        {
+            <h5 class="text-center">Congratulations! You sold this car.</h5>
+        }
+        else
+        {
+            <form asp-controller="CarAdds" asp-action="Sell" method="post">
+                <input name="addId" class="addId" id="addId" value="@Model.Id" hidden />
+                <div class="text-center">
+                    <button type="submit" class="btn btn btn-dark">Mark as sold</button>
+                </div>
+            </form>
+        }
+    }
+    else
+    {
+        <h4 class="text-center">Owner contacts:</h4>
+        <hr class="hr-style" />
+        <div>
+            <h5>Email:  @Model.OwnerEmail</h5>
+        </div>
+        <div>
+            <h5>Owner username: @Model.OwnerName</h5>
+        </div>
+        @if (Model.OwnerPhone != null)
+        {
+            <div>
+                <h5>Phone:  @Model.OwnerPhone</h5>
+            </div>
+        }
+        else
+        {
+            <div>
+                <h5>Phone: <span class="text-muted">No phone to show</span></h5>
+            </div>
+        }
+    }
+</div>

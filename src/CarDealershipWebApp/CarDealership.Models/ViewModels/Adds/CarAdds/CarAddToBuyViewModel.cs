@@ -5,6 +5,8 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
 {
     public class CarAddToBuyViewModel
     {
+        public string Id { get; set; }
+
         public string Title { get; set; }
 
         public string AdditionalInfo { get; set; }
@@ -38,5 +40,7 @@ namespace CarDealership.Models.ViewModels.Adds.CarAdds
         public ICollection<string> PicturesUrls { get; set; }
 
         public string CarExtras { get; set; }
+
+        public bool IsSold { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace CarDealership.App.Controllers
         private readonly UserService userService;
 
         private const string ViewAddErrorView = "ViewAddErrorView";
+        private const string SellCarErrorView = "SellCarErrorView";
 
         public CarAddsController(CarAddsService carAddsService, UserService userService)
         {
@@ -52,7 +53,9 @@ namespace CarDealership.App.Controllers
 
                 var carAddId = this.carAddsService.CreateCarAdd(model, carId, userId).Id;
 
-                return this.RedirectToAction("Index", "Home"); // TODO View Add
+                var viewModel = this.carAddsService.GetViewAddModel(carAddId);
+
+                return this.View(Constants.ViewAddView, viewModel);
             }
             catch (ArgumentException)
             {
@@ -116,6 +119,28 @@ namespace CarDealership.App.Controllers
                 var errorModel = this.carAddsService.GetErrorViewModel(Constants.AddNotFoundMessage);
 
                 return this.View(ViewAddErrorView, errorModel);
+            }
+        }
+
+        [Authorize]
+        public IActionResult Sell(string addId)
+        {
+            if (string.IsNullOrEmpty(addId))
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.AddNotFoundMessage);
+            }
+
+            try
+            {
+                this.carAddsService.SellCar(addId);
+
+                return this.RedirectToAction(Constants.MyAddsView, Constants.AddsController);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.carAddsService.GetErrorViewModel(Constants.AddNotFoundMessage);
+
+                return this.View(SellCarErrorView, errorModel);
             }
         }
     }
