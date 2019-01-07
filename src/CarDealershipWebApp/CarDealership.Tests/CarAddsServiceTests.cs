@@ -1,8 +1,6 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models.DataModels;
 using CarDealership.Models.DataModels.Adds.Vehicles;
-using CarDealership.Models.DataModels.Vehicles;
-using CarDealership.Models.DataModels.Vehicles.Enums;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
 using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Services;
@@ -10,7 +8,6 @@ using CarDealership.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
