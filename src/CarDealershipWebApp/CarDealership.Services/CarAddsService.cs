@@ -4,6 +4,7 @@ using CarDealership.Models.DataModels.Extras;
 using CarDealership.Models.DataModels.Pictures;
 using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
+using CarDealership.Models.ViewModels.Adds;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
 using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Utilities;
@@ -298,6 +299,21 @@ namespace CarDealership.Services
 
             this.db.Cars.Update(car);
             this.db.SaveChanges();
+        }
+
+        public List<ViewCarAddsViewModel> GetMyAdds(string username)
+        {
+            var carAdds = this.db.CarAdds.Where(ca => ca.Creator.UserName == username)
+                .Select(ca => new ViewCarAddsViewModel
+                {
+                    Id = ca.Id,
+                    AdditionalInfo = ca.AdditionalInfo,
+                    PictureUrl = this.db.CarPictures.FirstOrDefault(p => p.CarAddId == ca.Id).Url,
+                    Title = ca.Title
+                })
+                .ToList();
+
+            return carAdds;
         }
     }
 }

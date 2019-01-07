@@ -12,8 +12,6 @@ namespace CarDealership.Models.DataModels
         public DealershipUser()
         {
             this.CarAdds = new HashSet<CarAdd>();
-            this.TruckAdds = new HashSet<TruckAdd>();
-            this.MotorcycleAdds = new HashSet<MotorcycleAdd>();
             this.News = new HashSet<NewsClass>();
             this.Comments = new HashSet<Comment>();
         }
@@ -29,10 +27,6 @@ namespace CarDealership.Models.DataModels
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<CarAdd> CarAdds { get; set; }
-
-        public virtual ICollection<TruckAdd> TruckAdds { get; set; }
-
-        public virtual ICollection<MotorcycleAdd> MotorcycleAdds { get; set; }
 
         public virtual ICollection<NewsClass> News { get; set; }
 

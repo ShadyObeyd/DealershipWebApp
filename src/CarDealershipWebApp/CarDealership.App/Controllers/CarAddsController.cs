@@ -143,5 +143,14 @@ namespace CarDealership.App.Controllers
                 return this.View(SellCarErrorView, errorModel);
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult MyAdds()
+        {
+            var viewModel = this.carAddsService.GetMyAdds(this.User.Identity.Name);
+
+            return this.View(viewModel);
+        }
     }
 }

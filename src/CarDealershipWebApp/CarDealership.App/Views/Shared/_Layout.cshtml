@@ -32,15 +32,7 @@
                         <a class="nav-link" asp-controller="News" asp-action="All">All News</a>
                     </li>
                     <li class="nav-item">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Search for a vehicle
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="CarAdds" asp-action="Search">Buy a car</a>
-                            <a class="dropdown-item" asp-controller="" asp-action="">Buy a truck</a>
-                            <a class="dropdown-item" asp-controller="" asp-action="">Buy a motorcycle</a>
-                        </div>
+                        <a class="nav-link" asp-controller="CarAdds" asp-action="Search">Buy a car</a>
                     </li>
                     @if (this.User.Identity.IsAuthenticated)
                     {
@@ -50,10 +42,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="CarAdds" asp-action="Create">Sell a car</a>
-                                <a class="dropdown-item" asp-controller="" asp-action="">Sell a truck</a>
-                                <a class="dropdown-item" asp-controller="" asp-action="">Sell a motorcycle</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-controller="Adds" asp-action="MyAdds">My Adds</a>
+                                <a class="dropdown-item" asp-controller="CarAdds" asp-action="MyAdds">My Adds</a>
                             </div>
                         </li>
                         if (this.User.IsInRole(Constants.AdminRole))

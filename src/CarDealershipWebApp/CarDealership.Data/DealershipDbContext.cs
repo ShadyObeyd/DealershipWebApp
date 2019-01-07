@@ -29,15 +29,7 @@ namespace CarDealership.Data
 
         public DbSet<CarAdd> CarAdds { get; set; }
 
-        public DbSet<TruckAdd> TruckAdds { get; set; }
-
-        public DbSet<MotorcycleAdd> MotorcycleAdds { get; set; }
-
         public DbSet<Car> Cars { get; set; }
-
-        public DbSet<Truck> Trucks { get; set; }
-
-        public DbSet<Motorcycle> Motorcycles { get; set; }
 
         public DbSet<NewsClass> News { get; set; }
 
@@ -45,15 +37,7 @@ namespace CarDealership.Data
 
         public DbSet<CarExtra> CarExtras { get; set; }
 
-        public DbSet<MotorcycleExtra> MotorcycleExtras { get; set; }
-
-        public DbSet<TruckExtra> TruckExtras { get; set; }
-
         public DbSet<CarPicture> CarPictures { get; set; }
-
-        public DbSet<TruckPicture> TruckPictures { get; set; }
-
-        public DbSet<MotorcyclePicture> MotorcyclePictures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
