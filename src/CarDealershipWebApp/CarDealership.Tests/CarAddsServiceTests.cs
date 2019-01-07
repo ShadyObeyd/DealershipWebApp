@@ -8,6 +8,7 @@ using CarDealership.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,16 +18,25 @@ namespace CarDealership.Tests
 {
     public class CarAddsServiceTests
     {
-        [Fact]
-        public void GetCarEngineWorksCorectly()
+        private CarAddsService GetCarAddsService()
         {
+            var guid = new Guid().ToString();
+
             var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Car_Engine")
+                .UseInMemoryDatabase(databaseName: guid)
                 .Options;
 
             var db = new DealershipDbContext(options);
 
             var service = new CarAddsService(db);
+
+            return service;
+        }
+
+        [Fact]
+        public void GetCarEngineWorksCorectly()
+        {
+            var service = this.GetCarAddsService();
 
             var inputString = "Gasoline";
 
@@ -67,13 +77,7 @@ namespace CarDealership.Tests
         [Fact]
         public void GetCarTransmissionWorksCorectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Car_Transmission")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var inputString = "Manual";
 
@@ -100,13 +104,7 @@ namespace CarDealership.Tests
         [Fact]
         public void GetCarCategoryWorksCorectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Car_Category")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var inputString = "Saloon";
 
@@ -154,13 +152,7 @@ namespace CarDealership.Tests
         [Fact]
         public void CreateCarExtrasWorksCorrectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Create_Car_Extras")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var carExtras = "CD Player, Electric windows, electric mirrors, AC";
 
@@ -184,13 +176,7 @@ namespace CarDealership.Tests
         [Fact]
         public void GetErrorViewModelWorksCorrectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Error_Model")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var errorModel = new ErrorViewModel
             {
