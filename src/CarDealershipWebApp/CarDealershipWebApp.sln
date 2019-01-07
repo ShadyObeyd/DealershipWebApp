@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Models", "Car
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Utilities", "CarDealership.Utilities\CarDealership.Utilities.csproj", "{A35D5161-C63D-4A15-A87B-7D3A7BA08508}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Services", "CarDealership.Services\CarDealership.Services.csproj", "{C94BDA99-3830-43A5-ABC7-71C7ECA2DFA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Services", "CarDealership.Services\CarDealership.Services.csproj", "{C94BDA99-3830-43A5-ABC7-71C7ECA2DFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Tests", "CarDealership.Tests\CarDealership.Tests.csproj", "{4D29C744-7DAC-444F-B3BB-FCD3B822D8DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C94BDA99-3830-43A5-ABC7-71C7ECA2DFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C94BDA99-3830-43A5-ABC7-71C7ECA2DFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C94BDA99-3830-43A5-ABC7-71C7ECA2DFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D29C744-7DAC-444F-B3BB-FCD3B822D8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D29C744-7DAC-444F-B3BB-FCD3B822D8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D29C744-7DAC-444F-B3BB-FCD3B822D8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D29C744-7DAC-444F-B3BB-FCD3B822D8DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
