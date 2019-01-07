@@ -1,4 +1,5 @@
 ﻿using CarDealership.Data;
+using CarDealership.Models.DataModels;
 using CarDealership.Models.DataModels.Adds.Vehicles;
 using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.DataModels.Vehicles.Enums;
@@ -514,6 +515,82 @@ namespace CarDealership.Tests
             service.SellCar(carAdd.Id);
 
             Assert.True(carAdd.Car.IsSold == true);
+        }
+
+        [Fact]
+        public void GetMyAddsWorksCorrectly()
+        {
+            var options = new DbContextOptionsBuilder<DealershipDbContext>()
+                .UseInMemoryDatabase(databaseName: "Get_My_Adds")
+                .Options;
+
+            var db = new DealershipDbContext(options);
+
+            var userMock = new Mock<DealershipUser>();
+
+            userMock.Setup(u => u.Id).Returns("1");
+            userMock.Setup(u => u.UserName).Returns("Pesho");
+
+            var service = new CarAddsService(db);
+
+            var imageMock = new Mock<IFormFile>();
+
+            var content = "Fake file";
+
+            var fileName = "text.jpg";
+
+            var memoryStream = new MemoryStream();
+
+            var writer = new StreamWriter(memoryStream);
+
+            writer.Write(content);
+            writer.Flush();
+
+            memoryStream.Position = 0;
+
+            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
+            imageMock.Setup(_ => _.FileName).Returns(fileName);
+            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
+
+            var fakeImage = imageMock.Object;
+
+            var inputModel = new CarAddInputModel
+            {
+                CarMake = "Opel",
+                CarModel = "Vectra",
+                CarCategory = "Saloon",
+                CarColor = "White",
+                CarEngineType = "Gasoline / LPG",
+                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
+                CarHorsePower = 130,
+                CarLocation = "Nqkude",
+                CarPrice = 5000m,
+                CarTransmission = "Manual",
+                CarYearOfProduction = 2006,
+                Title = "Opel Vectra; Good Quality",
+                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
+                Pictures = new List<IFormFile>() { fakeImage }
+            };
+
+            var engineType = service.GetCarEngineType(inputModel.CarEngineType);
+            var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
+            var category = service.GetCarCategory(inputModel.CarCategory);
+            var extras = service.CreateCarExtras(inputModel.CarExtras);
+
+            var car = service.CreateCar(inputModel, engineType, transmission, category, extras);
+
+            var carAdd = service.CreateCarAdd(inputModel, car.Id, "1");
+
+            userMock.Setup(u => u.CarAdds).Returns(new List<CarAdd> { carAdd });
+
+            var fakeUser = userMock.Object;
+
+            db.Users.Add(fakeUser);
+            db.SaveChanges();
+
+            var myAdds = service.GetMyAdds("Pesho");
+
+            Assert.True(myAdds.Count() == 1);
         }
     }
 }
