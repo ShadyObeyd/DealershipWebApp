@@ -105,6 +105,33 @@ namespace CarDealership.Services
             this.db.SaveChanges();
         }
 
+        public EditNewsViewModel GetNewsToEdit(string newsId)
+        {
+            this.CheckInputParameter(newsId);
+
+            var news = this.db.News.Where(n => n.Id == newsId).Select(n => new EditNewsViewModel
+            {
+                Id = n.Id,
+                Title = n.Title,
+                Content = n.Content
+            }).FirstOrDefault();
+
+            return news;
+        }
+
+        public void EditNews(EditNewsViewModel inputModel, string newsId)
+        {
+            this.CheckInputParameter(newsId);
+
+            var news = this.db.News.FirstOrDefault(n => n.Id == newsId);
+
+            news.Content = inputModel.Content;
+            news.Title = inputModel.Title;
+
+            this.db.News.Update(news);
+            this.db.SaveChanges();
+        }
+
         private void CheckInputParameter(string parameter)
         {
             if (!this.db.News.Any(n => n.Id == parameter))

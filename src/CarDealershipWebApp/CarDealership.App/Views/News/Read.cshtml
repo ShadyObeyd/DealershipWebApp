@@ -10,12 +10,24 @@
 </blockquote>
 @if (this.User.IsInRole(Constants.AdminRole))
 {
-    <form class="form-inline" asp-area="Administration" asp-controller="News" asp-action="Delete" method="post">
-        <input class="newsId" name="newsId" value="@Model.Id" hidden />
-        <div class="col-12 text-center">
-            <button type="submit" class="btn btn-dark">Delete News</button>
+    <div class="row justify-content-lg-center">
+        <div class="col-xl-auto">
+            <form class="form-inline" asp-area="Administration" asp-controller="News" asp-action="Delete" method="post">
+                <input class="newsId" name="newsId" value="@Model.Id" hidden />
+                <div>
+                    <button type="submit" class="btn btn-dark">Delete News</button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div>
+            <form class="form-inline" asp-area="Administration" asp-controller="News" asp-action="Edit" method="get">
+                <input class="newsId" name="newsId" value="@Model.Id" hidden />
+                <div>
+                    <button type="submit" class="btn btn-dark">Edit News</button>
+                </div>
+            </form>
+        </div>
+    </div>
 }
 <hr class="hr-style" />
 <partial name="ReadPartial" />
@@ -34,11 +46,11 @@
         </div>
         @if (this.User.IsInRole(Constants.AdminRole))
         {
-        <form class="form-inline" asp-area="Administration" asp-controller="Comments" asp-action="Delete" method="post">
-            <input class="commentId" name="commentId" value="@comment.Id" hidden />
-            <input class="newsId" name="newsId" value="@Model.Id" hidden />
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Comment</button>
-        </form>
+            <form class="form-inline" asp-area="Administration" asp-controller="Comments" asp-action="Delete" method="post">
+                <input class="commentId" name="commentId" value="@comment.Id" hidden />
+                <input class="newsId" name="newsId" value="@Model.Id" hidden />
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Comment</button>
+            </form>
         }
         <hr />
     }

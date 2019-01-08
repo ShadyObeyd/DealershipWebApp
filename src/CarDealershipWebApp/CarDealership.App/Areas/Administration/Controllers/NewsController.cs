@@ -17,7 +17,7 @@ namespace CarDealership.App.Areas.Administration.Controllers
         private readonly NewsService newsService;
         private readonly UserManager<DealershipUser> userManager;
 
-        private const string ErrorView = "DeleteError";
+        private const string DeleteErrorView = "DeleteError";
 
         public NewsController(NewsService newsService, UserManager<DealershipUser> userManager)
         {
@@ -54,7 +54,7 @@ namespace CarDealership.App.Areas.Administration.Controllers
             {
                 var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
 
-                return this.View(ErrorView, model);
+                return this.View(DeleteErrorView, model);
             }
 
             try
@@ -67,7 +67,55 @@ namespace CarDealership.App.Areas.Administration.Controllers
             {
                 var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
 
-                return this.View(ErrorView, model);
+                return this.View(DeleteErrorView, model);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string newsId)
+        {
+            if (string.IsNullOrEmpty(newsId))
+            {
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(DeleteErrorView, model);
+            }
+
+            try
+            {
+                var newsToEdit = this.newsService.GetNewsToEdit(newsId);
+
+                return this.View(newsToEdit);
+            }
+            catch (ArgumentException)
+            {
+                var model = this.newsService.GetErrorViewModel(Constants.NewsNotFoundMessage);
+
+                return this.View(DeleteErrorView, model);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditNewsViewModel inputModel, string newsId)
+        {
+            if (!this.ModelState.IsValid || string.IsNullOrEmpty(newsId))
+            {
+                var errorModel = this.newsService.GetErrorViewModel(Constants.InvalidNewsInputModelMessage);
+
+                return this.View(DeleteErrorView, errorModel);
+            }
+
+            try
+            {
+                this.newsService.EditNews(inputModel, newsId);
+
+                return this.RedirectToAction(Constants.ReadNewsView, Constants.NewsController, new { area = string.Empty, newsId });
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.newsService.GetErrorViewModel(Constants.InvalidNewsInputModelMessage);
+
+                return this.View(DeleteErrorView, errorModel);
             }
         }
 
