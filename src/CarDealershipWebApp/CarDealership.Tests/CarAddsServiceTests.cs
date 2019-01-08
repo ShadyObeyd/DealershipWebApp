@@ -1,7 +1,6 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models.DataModels;
 using CarDealership.Models.DataModels.Adds.Vehicles;
-using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
 using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Services;
@@ -29,9 +28,7 @@ namespace CarDealership.Tests
 
             var db = new DealershipDbContext(options);
 
-            var service = new CarAddsService(db);
-
-            return service;
+            return new CarAddsService(db);
         }
 
         private CarAddInputModel GetCarAddInputModel()
@@ -262,8 +259,8 @@ namespace CarDealership.Tests
         public void CreateCarAddWorksCorrectlyAndSavesInDb()
         {
             var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Create_Car_Add")
-                .Options;
+                   .UseInMemoryDatabase(databaseName: "Create_CarAdd")
+                   .Options;
 
             var db = new DealershipDbContext(options);
 
@@ -289,7 +286,7 @@ namespace CarDealership.Tests
         public void GetAddsAccordingToCriteriaWorksCorrectly()
         {
             var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Car_Adds")
+                .UseInMemoryDatabase(databaseName: "Get_Adds_By_Criteria")
                 .Options;
 
             var db = new DealershipDbContext(options);
@@ -330,13 +327,7 @@ namespace CarDealership.Tests
         [Fact]
         public void GetViewAddModelWorksCorrectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_View_Add")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var inputModel = this.GetCarAddInputModel();
 
@@ -358,13 +349,7 @@ namespace CarDealership.Tests
         [Fact]
         public void SellCarWorksCorrectly()
         {
-            var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sell_Car")
-                .Options;
-
-            var db = new DealershipDbContext(options);
-
-            var service = new CarAddsService(db);
+            var service = this.GetCarAddsService();
 
             var inputModel = this.GetCarAddInputModel();
 
@@ -388,8 +373,8 @@ namespace CarDealership.Tests
         public void GetMyAddsWorksCorrectly()
         {
             var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Get_My_Adds")
-                .Options;
+                   .UseInMemoryDatabase(databaseName: "Get_My_Adds")
+                   .Options;
 
             var db = new DealershipDbContext(options);
 

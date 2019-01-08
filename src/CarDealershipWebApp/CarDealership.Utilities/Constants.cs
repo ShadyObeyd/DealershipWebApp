@@ -79,5 +79,7 @@ namespace CarDealership.Utilities
 
         public const string MyAddsView = "MyAdds";
         public const string AddsController = "Adds";
+
+        public const int NewsCountToDisplay = 5;
     }
 }
