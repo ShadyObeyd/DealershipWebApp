@@ -1,6 +1,7 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models.DataModels;
 using CarDealership.Models.DataModels.Adds.Vehicles;
+using CarDealership.Models.DataModels.Vehicles;
 using CarDealership.Models.ViewModels.Adds.CarAdds;
 using CarDealership.Models.ViewModels.Errors;
 using CarDealership.Services;
@@ -31,6 +32,50 @@ namespace CarDealership.Tests
             var service = new CarAddsService(db);
 
             return service;
+        }
+
+        private CarAddInputModel GetCarAddInputModel()
+        {
+            var imageMock = new Mock<IFormFile>();
+
+            var content = "Fake file";
+
+            var fileName = "text.jpg";
+
+            var memoryStream = new MemoryStream();
+
+            var writer = new StreamWriter(memoryStream);
+
+            writer.Write(content);
+            writer.Flush();
+
+            memoryStream.Position = 0;
+
+            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
+            imageMock.Setup(_ => _.FileName).Returns(fileName);
+            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
+
+            var fakeImage = imageMock.Object;
+
+            var inputModel = new CarAddInputModel
+            {
+                CarMake = "Opel",
+                CarModel = "Vectra",
+                CarCategory = "Saloon",
+                CarColor = "White",
+                CarEngineType = "Gasoline / LPG",
+                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
+                CarHorsePower = 130,
+                CarLocation = "Nqkude",
+                CarPrice = 5000m,
+                CarTransmission = "Manual",
+                CarYearOfProduction = 2006,
+                Title = "Opel Vectra; Good Quality",
+                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
+                Pictures = new List<IFormFile>() { fakeImage }
+            };
+
+            return inputModel;
         }
 
         [Fact]
@@ -197,20 +242,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
@@ -237,44 +269,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var imageMock = new Mock<IFormFile>();
-
-            var content = "Fake file";
-
-            var fileName = "text.jpg";
-
-            var memoryStream = new MemoryStream();
-
-            var writer = new StreamWriter(memoryStream);
-
-            writer.Write(content);
-            writer.Flush();
-
-            memoryStream.Position = 0;
-
-            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
-            imageMock.Setup(_ => _.FileName).Returns(fileName);
-            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
-
-            var fakeImage = imageMock.Object;
-
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006,
-                Title = "Opel Vectra; Good Quality",
-                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
-                Pictures = new List<IFormFile>() { fakeImage }
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
@@ -301,44 +296,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var imageMock = new Mock<IFormFile>();
-
-            var content = "Fake file";
-
-            var fileName = "text.jpg";
-
-            var memoryStream = new MemoryStream();
-
-            var writer = new StreamWriter(memoryStream);
-
-            writer.Write(content);
-            writer.Flush();
-
-            memoryStream.Position = 0;
-
-            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
-            imageMock.Setup(_ => _.FileName).Returns(fileName);
-            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
-
-            var fakeImage = imageMock.Object;
-
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006,
-                Title = "Opel Vectra; Good Quality",
-                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
-                Pictures = new List<IFormFile>() { fakeImage }
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
@@ -380,44 +338,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var imageMock = new Mock<IFormFile>();
-
-            var content = "Fake file";
-
-            var fileName = "text.jpg";
-
-            var memoryStream = new MemoryStream();
-
-            var writer = new StreamWriter(memoryStream);
-
-            writer.Write(content);
-            writer.Flush();
-
-            memoryStream.Position = 0;
-
-            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
-            imageMock.Setup(_ => _.FileName).Returns(fileName);
-            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
-
-            var fakeImage = imageMock.Object;
-
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006,
-                Title = "Opel Vectra; Good Quality",
-                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
-                Pictures = new List<IFormFile>() { fakeImage }
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
@@ -445,44 +366,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var imageMock = new Mock<IFormFile>();
-
-            var content = "Fake file";
-
-            var fileName = "text.jpg";
-
-            var memoryStream = new MemoryStream();
-
-            var writer = new StreamWriter(memoryStream);
-
-            writer.Write(content);
-            writer.Flush();
-
-            memoryStream.Position = 0;
-
-            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
-            imageMock.Setup(_ => _.FileName).Returns(fileName);
-            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
-
-            var fakeImage = imageMock.Object;
-
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006,
-                Title = "Opel Vectra; Good Quality",
-                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
-                Pictures = new List<IFormFile>() { fakeImage }
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
@@ -516,44 +400,7 @@ namespace CarDealership.Tests
 
             var service = new CarAddsService(db);
 
-            var imageMock = new Mock<IFormFile>();
-
-            var content = "Fake file";
-
-            var fileName = "text.jpg";
-
-            var memoryStream = new MemoryStream();
-
-            var writer = new StreamWriter(memoryStream);
-
-            writer.Write(content);
-            writer.Flush();
-
-            memoryStream.Position = 0;
-
-            imageMock.Setup(_ => _.OpenReadStream()).Returns(memoryStream);
-            imageMock.Setup(_ => _.FileName).Returns(fileName);
-            imageMock.Setup(_ => _.Length).Returns(memoryStream.Length);
-
-            var fakeImage = imageMock.Object;
-
-            var inputModel = new CarAddInputModel
-            {
-                CarMake = "Opel",
-                CarModel = "Vectra",
-                CarCategory = "Saloon",
-                CarColor = "White",
-                CarEngineType = "Gasoline / LPG",
-                CarExtras = "CD Player, Electric windows, electric mirrors, AC",
-                CarHorsePower = 130,
-                CarLocation = "Nqkude",
-                CarPrice = 5000m,
-                CarTransmission = "Manual",
-                CarYearOfProduction = 2006,
-                Title = "Opel Vectra; Good Quality",
-                AdditionalInfo = "The car is ina great shape! You can drive it anywhere without a problem!",
-                Pictures = new List<IFormFile>() { fakeImage }
-            };
+            var inputModel = this.GetCarAddInputModel();
 
             var engineType = service.GetCarEngineType(inputModel.CarEngineType);
             var transmission = service.GetCarTransmissionType(inputModel.CarTransmission);
