@@ -168,5 +168,44 @@ namespace CarDealership.Tests
 
             Assert.True(db.News.Count() == 0);
         }
+        
+        [Fact]
+        public void GetNewsToEditReturnsTheCorrectNews()
+        {
+            var service = this.GetNewsService();
+
+            var inputModel = this.GetNewsCreateInputModel();
+
+            var news = service.CreateNews(inputModel, NewsAuthorId);
+
+            var newsToEditModel = service.GetNewsToEdit(news.Id);
+
+            Assert.True(newsToEditModel.Id == news.Id);
+        }
+
+        [Fact]
+        public void EditNewsWorksCorrectly()
+        {
+            var service = this.GetNewsService();
+
+            var inputModel = this.GetNewsCreateInputModel();
+
+            var news = service.CreateNews(inputModel, NewsAuthorId);
+
+            Assert.True(news.Title == NewsTitle);
+            Assert.True(news.Content == NewsContent);
+
+            var editModel = new EditNewsViewModel
+            {
+                Id = news.Id,
+                Content = "Changed Content",
+                Title = "Changed Title"
+            };
+
+            service.EditNews(editModel, editModel.Id);
+
+            Assert.True(news.Title == editModel.Title);
+            Assert.True(news.Content == editModel.Content);
+        }
     }
 }
