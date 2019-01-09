@@ -72,7 +72,7 @@ namespace CarDealership.Tests
         public void GetErrorModelReturnsTheCorrectMessage()
         {
             var options = new DbContextOptionsBuilder<DealershipDbContext>()
-                .UseInMemoryDatabase(databaseName: "Delete_Comment")
+                .UseInMemoryDatabase(databaseName: "Get_Error_Model")
                 .Options;
 
             var db = new DealershipDbContext(options);
@@ -82,6 +82,28 @@ namespace CarDealership.Tests
             var errorModel = commentsService.GetErrorModel(Constants.CommentErrorMessage);
 
             Assert.True(errorModel.Message == Constants.CommentErrorMessage);
+        }
+
+        [Fact]
+        public void EditCommentWorksCorrectly()
+        {
+            var options = new DbContextOptionsBuilder<DealershipDbContext>()
+                .UseInMemoryDatabase(databaseName: "Edit_Comment")
+                .Options;
+
+            var db = new DealershipDbContext(options);
+
+            var commentsService = new CommentsService(db);
+            var newsService = new NewsService(db);
+
+            var news = newsService.CreateNews(GetNewsCreateInputModel(), AuthorId);
+            var comment = commentsService.Create(AuthorId, news.Id, Content);
+
+            Assert.True(comment.Content == Content);
+
+            commentsService.EditComment(comment.Id, "Changed Content!");
+
+            Assert.True(comment.Content == "Changed Content!");
         }
     }
 }
