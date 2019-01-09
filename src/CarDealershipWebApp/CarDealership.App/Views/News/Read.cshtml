@@ -44,9 +44,9 @@
                 @comment.Content
             </div>
         </div>
-        @if (this.User.IsInRole(Constants.AdminRole))
-        {
-            <div class="row">
+        <div class="row">
+            @if (this.User.IsInRole(Constants.AdminRole))
+            {
                 <div class="col-xl-auto">
                     <form class="form-inline" asp-area="Administration" asp-controller="Comments" asp-action="Delete" method="post">
                         <input class="commentId" name="commentId" value="@comment.Id" hidden />
@@ -54,17 +54,17 @@
                         <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Comment</button>
                     </form>
                 </div>
-                <div>
-                    @if (this.User.Identity.Name == comment.Author)
-                    {
-                        <form class="form-inline" asp-controller="Comments" asp-action="Edit" method="get">
-                            <input class="newsId" name="newsId" value="@Model.Id" hidden />
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Edit Comment</button>
-                        </form>
-                    }
+            }
+            @if (this.User.Identity.Name == comment.Author)
+            {
+                <div class="col-xl-auto">
+                    <form class="form-inline" asp-controller="Comments" asp-action="Edit" method="get">
+                        <input class="newsId" name="newsId" value="@Model.Id" hidden />
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Edit Comment</button>
+                    </form>
                 </div>
-            </div>
-        }
+            }
+        </div>
         <hr />
     }
 </div>
