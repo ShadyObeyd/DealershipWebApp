@@ -81,5 +81,7 @@ namespace CarDealership.Utilities
         public const string AddsController = "Adds";
 
         public const int NewsCountToDisplay = 5;
+
+        public const string EditCommentErrorMessage = "The comment you are trying to edit does not exist.";
     }
 }

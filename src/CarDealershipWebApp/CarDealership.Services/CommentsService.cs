@@ -56,5 +56,20 @@ namespace CarDealership.Services
                 Message = message
             };
         }
+
+        public void EditComment(string commentId, string content)
+        {
+            var comment = this.db.Comments.FirstOrDefault(c => c.Id == commentId);
+
+            if (comment == null)
+            {
+                throw new ArgumentException();
+            }
+
+            comment.Content = content;
+
+            this.db.Comments.Update(comment);
+            this.db.SaveChanges();
+        }
     }
 }

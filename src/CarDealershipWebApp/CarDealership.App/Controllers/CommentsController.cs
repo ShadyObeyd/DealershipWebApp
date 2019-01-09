@@ -51,5 +51,60 @@ namespace CarDealership.App.Controllers
                 return this.View(Constants.ErrorView, model);
             }
         }
+
+        [HttpGet]
+        public IActionResult Edit(string newsId)
+        {
+            if (string.IsNullOrEmpty(newsId))
+            {
+                var errorModel = this.commentsService.GetErrorModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+
+            try
+            {
+                var editCommentModel = this.newsService.GetReadModel(newsId);
+
+                return this.View(editCommentModel);
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.commentsService.GetErrorModel(Constants.EditCommentErrorMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(string commentId, string content, string newsId)
+        {
+            if (string.IsNullOrEmpty(commentId) || string.IsNullOrEmpty(content))
+            {
+                var errorModel = this.commentsService.GetErrorModel(Constants.CommentContentErrorMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+
+            if (string.IsNullOrEmpty(newsId))
+            {
+                var errorModel = this.commentsService.GetErrorModel(Constants.NewsNotFoundMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+
+            try
+            {
+                this.commentsService.EditComment(commentId, content);
+
+                return this.RedirectToAction(Constants.ReadNewsView, Constants.NewsController, new { newsId });
+            }
+            catch (ArgumentException)
+            {
+                var errorModel = this.commentsService.GetErrorModel(Constants.CommentErrorMessage);
+
+                return this.View(Constants.ErrorView, errorModel);
+            }
+        }
     }
 }
